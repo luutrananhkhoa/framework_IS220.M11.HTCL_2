@@ -1,0 +1,73 @@
+﻿@model QLW.Models.UuserModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>UuserModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="maUser" class="control-label"></label>
+                <input asp-for="maUser" class="form-control" />
+                <span asp-validation-for="maUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maKH" class="control-label"></label>
+                <input asp-for="maKH" class="form-control" />
+                <span asp-validation-for="maKH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maNV" class="control-label"></label>
+                <input asp-for="maNV" class="form-control" />
+                <span asp-validation-for="maNV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maNVVC" class="control-label"></label>
+                <input asp-for="maNVVC" class="form-control" />
+                <span asp-validation-for="maNVVC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="uuserName" class="control-label"></label>
+                <input asp-for="uuserName" class="form-control" />
+                <span asp-validation-for="uuserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ppassWord" class="control-label"></label>
+                <input asp-for="ppassWord" class="form-control" />
+                <span asp-validation-for="ppassWord" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="uUPDATE" /> @Html.DisplayNameFor(model => model.uUPDATE)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="cCREATE" /> @Html.DisplayNameFor(model => model.cCREATE)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="daXoa" /> @Html.DisplayNameFor(model => model.daXoa)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

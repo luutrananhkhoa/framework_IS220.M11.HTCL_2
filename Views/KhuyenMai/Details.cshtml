@@ -1,0 +1,48 @@
+﻿@model QLW.Models.KhuyenMaiModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>KhuyenMaiModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tenKM)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tenKM)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.phanTram)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.phanTram)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ngayBatDau)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ngayBatDau)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.hieuLuc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.hieuLuc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.daXoa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.daXoa)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.maKM">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

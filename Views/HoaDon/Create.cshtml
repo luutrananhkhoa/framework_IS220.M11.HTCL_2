@@ -1,0 +1,83 @@
+﻿@model QLW.Models.HoaDonModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>HoaDonModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="soHD" class="control-label"></label>
+                <input asp-for="soHD" class="form-control" />
+                <span asp-validation-for="soHD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maKH" class="control-label"></label>
+                <input asp-for="maKH" class="form-control" />
+                <span asp-validation-for="maKH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maNVVC" class="control-label"></label>
+                <input asp-for="maNVVC" class="form-control" />
+                <span asp-validation-for="maNVVC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="khauTru" class="control-label"></label>
+                <input asp-for="khauTru" class="form-control" />
+                <span asp-validation-for="khauTru" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maNV" class="control-label"></label>
+                <input asp-for="maNV" class="form-control" />
+                <span asp-validation-for="maNV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tongGia" class="control-label"></label>
+                <input asp-for="tongGia" class="form-control" />
+                <span asp-validation-for="tongGia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tongSL" class="control-label"></label>
+                <input asp-for="tongSL" class="form-control" />
+                <span asp-validation-for="tongSL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tinhTrang" class="control-label"></label>
+                <input asp-for="tinhTrang" class="form-control" />
+                <span asp-validation-for="tinhTrang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ngayLapHD" class="control-label"></label>
+                <input asp-for="ngayLapHD" class="form-control" />
+                <span asp-validation-for="ngayLapHD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ngayHoanTat" class="control-label"></label>
+                <input asp-for="ngayHoanTat" class="form-control" />
+                <span asp-validation-for="ngayHoanTat" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="daXoa" /> @Html.DisplayNameFor(model => model.daXoa)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
