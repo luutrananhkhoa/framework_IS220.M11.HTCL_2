@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace QLW.Models
 {
-    public class ChiTietHoaDonModel
+    public class GioHangModel
     {
-        [Display(Name = "Số Hóa Đơn")]
-        public string soHD { get; set; }
-        [ForeignKey("soHD")]
+        [Display(Name = "Mã Khách Hàng")]
+        public string maKH { get; set; }
+        [ForeignKey("maKH")]
         [Display(Name = "Mã Sản Phẩm")]
         public string maSP { get; set; }
         [ForeignKey("maSP")]
         [Display(Name = "Số Lượng")]
         public int soLuong { get; set; }
-        [Display(Name = "Thành Tiền")]
-        public long thanhTien { get; set; }
-      
         //public SanPhamModel SanPhams { get; set; }
-        //public HoaDonModel HoaDons { get; set; }
+        //public KhachHangModel KhachHangs { get; set; }
     }
 }
