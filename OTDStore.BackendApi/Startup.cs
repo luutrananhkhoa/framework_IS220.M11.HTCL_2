@@ -22,6 +22,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OTDStore.Application.System.Roles;
 using OTDStore.Utilities.Constants;
+using OTDStore.Application.Catalog.Categories;
 
 namespace OTDStore.BackendApi
 {
@@ -47,6 +48,8 @@ namespace OTDStore.BackendApi
             services.AddTransient<IStorageService, FileStorageService>();
 
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();

@@ -33,7 +33,8 @@ namespace OTDStore.AdminApp.Services
         {
             var data = await GetAsync<PagedResult<ProductVM>>(
                 $"/api/products/paging?pageIndex={request.PageIndex}" +
-                $"&pageSize={request.PageSize}&keyword={request.Keyword}");
+                $"&pageSize={request.PageSize}" +
+                $"&keyword={request.Keyword}&categoryId={request.CategoryId}");
 
             return data;
         }
