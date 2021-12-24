@@ -12,5 +12,9 @@ namespace OTDStore.AdminApp.Services
         Task<PagedResult<ProductVM>> GetPagings(GetManageProductPagingRequest request);
 
         Task<bool> CreateProduct(ProductCreateRequest request);
+
+        Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
+
+        Task<ProductVM> GetById(int id);
     }
 }

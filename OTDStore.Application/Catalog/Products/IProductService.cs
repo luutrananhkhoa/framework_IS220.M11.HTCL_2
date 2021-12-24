@@ -25,5 +25,6 @@ namespace OTDStore.Application.Catalog.Products
         Task<ProductImageViewModel> GetImageById(int imageId);
         Task<List<ProductImageViewModel>> GetListImage(int productId);
         Task<PagedResult<ProductVM>> GetAllByCategoryId(GetPublicProductPagingRequest request);
+        Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
     }
 }
