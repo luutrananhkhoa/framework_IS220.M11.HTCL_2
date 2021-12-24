@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "OTDStoreDb":"Server=LAPTOP-OVS2U3JA\\SQLEXPRESS;Database=OTDStore;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
