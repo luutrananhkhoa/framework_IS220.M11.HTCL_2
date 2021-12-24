@@ -18,4 +18,8 @@
     <ProjectReference Include="..\OTDStore.ViewModels\OTDStore.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
+
 </Project>
