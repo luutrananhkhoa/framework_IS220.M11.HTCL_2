@@ -4,7 +4,21 @@
     ViewData["Title"] = "Cập nhật người dùng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#txt_des'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}
 
 <div class="container-fluid">
 

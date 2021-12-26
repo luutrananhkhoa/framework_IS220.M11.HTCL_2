@@ -1,7 +1,7 @@
-﻿@model OTDStore.ViewModels.Catalog.Products.ProductCreateRequest
+﻿@model OTDStore.ViewModels.Catalog.Products.ProductUpdateRequest
 
 @{
-    ViewData["Title"] = "Tạo mới sản phẩm";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
@@ -32,8 +32,13 @@
         </div>
         <div class="card-body">
             <div class="col-md-8">
-                <form asp-action="Create" enctype="multipart/form-data" method="post">
+                <form asp-action="Edit" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Id" class="control-label"></label>
+                        <input asp-for="Id" class="form-control" />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" />
@@ -41,12 +46,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Insurance" class="control-label"></label>
-                        <textarea id="txt_des" asp-for="Insurance" rows="5" class="form-control"></textarea>
+                        <input asp-for="Insurance" class="form-control" />
                         <span asp-validation-for="Insurance" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
-                        <textarea id="txt_des" asp-for="Description" rows="5" class="form-control"></textarea>
+                        <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -111,29 +116,30 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Price" class="control-label"></label>
-                        <input asp-for="Price" type="number" class="form-control" />
+                        <input asp-for="Price" class="form-control" />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="OriginalPrice" class="control-label"></label>
-                        <input asp-for="OriginalPrice" type="number" class="form-control" />
+                        <input asp-for="OriginalPrice" class="form-control" />
                         <span asp-validation-for="OriginalPrice" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Stock" class="control-label"></label>
-                        <input asp-for="Stock" type="number" class="form-control" />
+                        <input asp-for="Stock" class="form-control" />
                         <span asp-validation-for="Stock" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ThumbnailImage" class="control-label"></label>
-                        <input asp-for="ThumbnailImage" type="file" class="form-control" />
-                        <span asp-validation-for="ThumbnailImage" class="text-danger"></span>
+                        <label asp-for="IsFeature" class="control-label"></label>
+                        <input asp-for="IsFeature" class="form-control" />
+                        <span asp-validation-for="IsFeature" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
