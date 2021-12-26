@@ -9,5 +9,6 @@ namespace OTDStore.ViewModels.Catalog.Products
     {
         public string Keyword { get; set; }
         public int? CategoryId { get; set; }
+        public int? BrandId { get; set; }
     }
 }

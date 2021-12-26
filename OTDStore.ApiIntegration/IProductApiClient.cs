@@ -17,6 +17,8 @@ namespace OTDStore.ApiIntegration
 
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
 
+        Task<ApiResult<bool>> BrandAssign(int id, BrandAssignRequest request);
+
         Task<ProductVM> GetById(int id);
 
         Task<List<ProductVM>> GetLatestProducts(int take);

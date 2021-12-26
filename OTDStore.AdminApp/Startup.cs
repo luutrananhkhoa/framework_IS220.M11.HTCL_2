@@ -55,6 +55,8 @@ namespace OTDStore.AdminApp
 
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 
+            services.AddTransient<IBrandApiClient, BrandApiClient>();
+
             IMvcBuilder builder = services.AddRazorPages();
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
