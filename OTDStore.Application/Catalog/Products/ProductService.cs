@@ -39,13 +39,20 @@ namespace OTDStore.Application.Catalog.Products
             var product = new Product()
             {
                 Name = request.Name,
+                Insurance = request.Insurance,
                 Description = request.Description,
                 YearRelease = request.YearRelease,
                 Color = request.Color,
+                CPU = request.CPU,
+                VGA = request.VGA,
                 Memory = request.Memory,
                 RAM = request.RAM,
                 Camera = request.Camera,
                 Bluetooth = request.Bluetooth,
+                Monitor = request.Monitor,
+                Battery = request.Battery,
+                Size = request.Size,
+                OS = request.OS,
                 Price = request.Price,
                 OriginalPrice = request.OriginalPrice,
                 Stock = request.Stock,
@@ -79,13 +86,23 @@ namespace OTDStore.Application.Catalog.Products
             if (product == null) throw new OTDStoreException($"Không thể tìm thấy sản phẩm có ID: {request.Id}");
 
             product.Name = request.Name;
+            product.Insurance = request.Insurance;
             product.Description = request.Description;
             product.YearRelease = request.YearRelease;
             product.Color = request.Color;
+            product.CPU = request.CPU;
+            product.VGA = request.VGA;
             product.Memory = request.Memory;
             product.RAM = request.RAM;
             product.Camera = request.Camera;
             product.Bluetooth = request.Bluetooth;
+            product.Monitor = request.Monitor;
+            product.Battery = request.Battery;
+            product.Size = request.Size;
+            product.OS = request.OS;
+            product.Price = request.Price;
+            product.OriginalPrice = request.OriginalPrice;
+            product.Stock = request.Stock;
 
             if (request.ThumbnailImage != null)
             {
@@ -103,7 +120,7 @@ namespace OTDStore.Application.Catalog.Products
         public async Task<int> Delete(int productId)
         {
             var product = await _context.Products.FindAsync(productId);
-            if (product == null) throw new OTDStoreException($"Không thể tìm thấy sản phẩm có ID: {productId}");
+            if (product == null) throw new OTDStoreException($"Cannot find a product: {productId}");
 
             var images = _context.ProductImages.Where(i => i.ProductId == productId);
             foreach (var image in images)
@@ -123,7 +140,7 @@ namespace OTDStore.Application.Catalog.Products
                         from pic in ppic.DefaultIfEmpty()
                         join c in _context.Categories on pic.CategoryId equals c.Id into picc
                         from c in picc.DefaultIfEmpty()
-                        select new { p, pic, c};
+                        select new { p, pic };
             //2. filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.p.Name.Contains(request.Keyword));
@@ -142,15 +159,22 @@ namespace OTDStore.Application.Catalog.Products
                 {
                     Id = x.p.Id,
                     Name = x.p.Name,
+                    Insurance = x.p.Insurance,
                     Description = x.p.Description,
                     YearRelease = x.p.YearRelease,
                     Color = x.p.Color,
+                    CPU = x.p.CPU,
+                    VGA = x.p.VGA,
                     Memory = x.p.Memory,
                     RAM = x.p.RAM,
                     Camera = x.p.Camera,
                     Bluetooth = x.p.Bluetooth,
-                    OriginalPrice = x.p.OriginalPrice,
+                    Monitor = x.p.Monitor,
+                    Battery = x.p.Battery,
+                    Size = x.p.Size,
+                    OS = x.p.OS,
                     Price = x.p.Price,
+                    OriginalPrice = x.p.OriginalPrice,
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount,
                     DateCreated = x.p.DateCreated
@@ -180,18 +204,23 @@ namespace OTDStore.Application.Catalog.Products
             {
                 Id = product.Id,
                 Name = product.Name,
+                Insurance = product.Insurance,
                 Description = product.Description,
                 YearRelease = product.YearRelease,
                 Color = product.Color,
+                CPU = product.CPU,
+                VGA = product.VGA,
                 Memory = product.Memory,
                 RAM = product.RAM,
                 Camera = product.Camera,
                 Bluetooth = product.Bluetooth,
+                Monitor = product.Monitor,
+                Battery = product.Battery,
+                Size = product.Size,
+                OS = product.OS,
                 Price = product.Price,
                 OriginalPrice = product.OriginalPrice,
                 Stock = product.Stock,
-                ViewCount = product.ViewCount,
-                DateCreated = product.DateCreated,
                 Categories = categories
             };
             return productViewModel;
@@ -324,14 +353,22 @@ namespace OTDStore.Application.Catalog.Products
                 {
                     Id = x.p.Id,
                     Name = x.p.Name,
+                    Insurance = x.p.Insurance,
                     Description = x.p.Description,
                     YearRelease = x.p.YearRelease,
                     Color = x.p.Color,
+                    CPU = x.p.CPU,
+                    VGA = x.p.VGA,
                     Memory = x.p.Memory,
                     RAM = x.p.RAM,
                     Camera = x.p.Camera,
-                    OriginalPrice = x.p.OriginalPrice,
+                    Bluetooth = x.p.Bluetooth,
+                    Monitor = x.p.Monitor,
+                    Battery = x.p.Battery,
+                    Size = x.p.Size,
+                    OS = x.p.OS,
                     Price = x.p.Price,
+                    OriginalPrice = x.p.OriginalPrice,
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount,
                     DateCreated = x.p.DateCreated

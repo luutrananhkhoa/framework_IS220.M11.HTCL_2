@@ -13,10 +13,14 @@ namespace OTDStore.ApiIntegration
 
         Task<bool> CreateProduct(ProductCreateRequest request);
 
+        Task<bool> UpdateProduct(ProductUpdateRequest request);
+
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
 
         Task<ProductVM> GetById(int id);
 
         Task<List<ProductVM>> GetLatestProducts(int take);
+
+        Task<bool> DeleteProduct(int id);
     }
 }

@@ -120,5 +120,85 @@ namespace OTDStore.AdminApp.Controllers
             }
             return categoryAssignRequest;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+
+            var product = await _productApiClient.GetById(id);
+            var editVm = new ProductUpdateRequest()
+            {
+                Name = product.Name,
+                Insurance = product.Insurance,
+                Description = product.Description,
+                YearRelease = product.YearRelease,
+                Color = product.Color,
+                CPU = product.CPU,
+                VGA = product.VGA,
+                Memory = product.Memory,
+                RAM = product.RAM,
+                Camera = product.Camera,
+                Bluetooth = product.Bluetooth,
+                Monitor = product.Monitor,
+                Battery = product.Battery,
+                Size = product.Size,
+                OS = product.OS,
+                Price = product.Price,
+                OriginalPrice = product.OriginalPrice,
+                Stock = product.Stock,
+            };
+            return View(editVm);
+        }
+
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Edit([FromForm] ProductUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View(request);
+
+            var result = await _productApiClient.UpdateProduct(request);
+            if (result)
+            {
+                TempData["result"] = "Cập nhật sản phẩm thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
+            return View(request);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(new ProductDeleteRequest()
+            {
+                Id = id
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProductDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _productApiClient.DeleteProduct(request.Id);
+            if (result)
+            {
+                TempData["result"] = "Xóa sản phẩm thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Xóa không thành công");
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var result = await _productApiClient.GetById(id);
+            return View(result);
+        }
     }
 }
