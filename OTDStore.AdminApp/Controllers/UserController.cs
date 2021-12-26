@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using OTDStore.AdminApp.Services;
+using OTDStore.ApiIntegration;
 using OTDStore.ViewModels.Common;
 using OTDStore.ViewModels.System.Users;
 using System;
