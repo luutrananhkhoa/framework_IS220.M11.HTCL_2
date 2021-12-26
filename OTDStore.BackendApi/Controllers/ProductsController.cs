@@ -160,6 +160,20 @@ namespace OTDStore.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpPut("{id}/brands")]
+        public async Task<IActionResult> BrandAssign(int id, [FromBody] BrandAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _productService.BrandAssign(id, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
         [HttpGet("latest/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetLatestProducts(int take)

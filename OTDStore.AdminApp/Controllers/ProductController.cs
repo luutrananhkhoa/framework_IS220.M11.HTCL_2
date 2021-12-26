@@ -18,23 +18,26 @@ namespace OTDStore.AdminApp.Controllers
         private readonly IProductApiClient _productApiClient;
         private readonly IConfiguration _configuration;
         private readonly ICategoryApiClient _categoryApiClient;
+        private readonly IBrandApiClient _brandApiClient;
 
-        public ProductController(IProductApiClient productApiClient,
-            IConfiguration configuration, ICategoryApiClient categoryApiClient)
+        public ProductController(IProductApiClient productApiClient, IConfiguration configuration, 
+            ICategoryApiClient categoryApiClient, IBrandApiClient brandApiClient)
         {
             _configuration = configuration;
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
+            _brandApiClient = brandApiClient;
         }
 
-        public async Task<IActionResult> Index(string keyword, int? categoryId, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string keyword, int? categoryId, int? brandId, int pageIndex = 1, int pageSize = 5)
         {
             var request = new GetManageProductPagingRequest()
             {
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize,
-                CategoryId = categoryId
+                CategoryId = categoryId,
+                BrandId = brandId
             };
             var data = await _productApiClient.GetPagings(request);
             ViewBag.Keyword = keyword;
@@ -45,6 +48,14 @@ namespace OTDStore.AdminApp.Controllers
                 Text = x.Name,
                 Value = x.Id.ToString(),
                 Selected = categoryId.HasValue && categoryId.Value == x.Id
+            });
+
+            var brands = await _brandApiClient.GetAll();
+            ViewBag.Brands = brands.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = brandId.HasValue && brandId.Value == x.Id
             });
 
             if (TempData["result"] != null)
@@ -119,6 +130,49 @@ namespace OTDStore.AdminApp.Controllers
                 });
             }
             return categoryAssignRequest;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BrandAssign(int id)
+        {
+            var roleAssignRequest = await GetBrandAssignRequest(id);
+            return View(roleAssignRequest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BrandAssign(BrandAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _productApiClient.BrandAssign(request.Id, request);
+
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Cập nhật thương hiệu thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", result.Message);
+            var roleAssignRequest = await GetBrandAssignRequest(request.Id);
+
+            return View(roleAssignRequest);
+        }
+        private async Task<BrandAssignRequest> GetBrandAssignRequest(int id)
+        {
+            var productObj = await _productApiClient.GetById(id);
+            var brands = await _brandApiClient.GetAll();
+            var brandAssignRequest = new BrandAssignRequest();
+            foreach (var role in brands)
+            {
+                brandAssignRequest.Brands.Add(new SelectItem()
+                {
+                    Id = role.Id.ToString(),
+                    Name = role.Name,
+                    Selected = productObj.Brands.Contains(role.Name)
+                });
+            }
+            return brandAssignRequest;
         }
 
         [HttpGet]

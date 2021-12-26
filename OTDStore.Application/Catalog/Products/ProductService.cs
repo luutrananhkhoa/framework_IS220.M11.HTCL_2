@@ -140,7 +140,11 @@ namespace OTDStore.Application.Catalog.Products
                         from pic in ppic.DefaultIfEmpty()
                         join c in _context.Categories on pic.CategoryId equals c.Id into picc
                         from c in picc.DefaultIfEmpty()
-                        select new { p, pic };
+                        join pib in _context.ProductInBrands on p.Id equals pib.ProductId into ppib
+                        from pib in ppib.DefaultIfEmpty()
+                        join b in _context.Brands on pib.BrandId equals b.Id into pibb
+                        from b in pibb.DefaultIfEmpty()
+                        select new { p, pic, pib };
             //2. filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.p.Name.Contains(request.Keyword));
@@ -148,6 +152,11 @@ namespace OTDStore.Application.Catalog.Products
             if (request.CategoryId != null && request.CategoryId != 0)
             {
                 query = query.Where(p => p.pic.CategoryId == request.CategoryId);
+            }
+
+            if (request.BrandId != null && request.BrandId != 0)
+            {
+                query = query.Where(p => p.pib.BrandId == request.BrandId);
             }
 
             //3. Paging
@@ -331,17 +340,30 @@ namespace OTDStore.Application.Catalog.Products
             return viewModel;
         }
 
-        public async Task<PagedResult<ProductVM>> GetAllByCategoryId(GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductVM>> GetAllByFilter(GetPublicProductPagingRequest request)
         {
             var query = from p in _context.Products
-                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId
-                        join c in _context.Categories on pic.CategoryId equals c.Id
-                        select new { p, pic };
-
+                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                        from pic in ppic.DefaultIfEmpty()
+                        join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                        from c in picc.DefaultIfEmpty()
+                        join pib in _context.ProductInBrands on p.Id equals pib.ProductId into ppib
+                        from pib in ppib.DefaultIfEmpty()
+                        join b in _context.Brands on pib.BrandId equals b.Id into pibb
+                        from b in pibb.DefaultIfEmpty()
+                        select new { p, pic, pib };
             //2. filter
-            if (request.CategoryId.HasValue && request.CategoryId.Value > 0)
+            if (!string.IsNullOrEmpty(request.Keyword))
+                query = query.Where(x => x.p.Name.Contains(request.Keyword));
+
+            if (request.CategoryId != null && request.CategoryId != 0)
             {
                 query = query.Where(p => p.pic.CategoryId == request.CategoryId);
+            }
+
+            if (request.BrandId != null && request.BrandId != 0)
+            {
+                query = query.Where(p => p.pib.BrandId == request.BrandId);
             }
 
             //3. Paging
@@ -406,6 +428,35 @@ namespace OTDStore.Application.Catalog.Products
                     await _context.ProductInCategories.AddAsync(new ProductInCategory()
                     {
                         CategoryId = int.Parse(category.Id),
+                        ProductId = id
+                    });
+                }
+            }
+            await _context.SaveChangesAsync();
+            return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<bool>> BrandAssign(int id, BrandAssignRequest request)
+        {
+            var user = await _context.Products.FindAsync(id);
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>($"Sản phẩm với id {id} không tồn tại");
+            }
+            foreach (var brand in request.Brands)
+            {
+                var productInBrand = await _context.ProductInBrands
+                    .FirstOrDefaultAsync(x => x.BrandId == int.Parse(brand.Id)
+                    && x.ProductId == id);
+                if (productInBrand != null && brand.Selected == false)
+                {
+                    _context.ProductInBrands.Remove(productInBrand);
+                }
+                else if (productInBrand == null && brand.Selected)
+                {
+                    await _context.ProductInBrands.AddAsync(new ProductInBrand()
+                    {
+                        BrandId = int.Parse(brand.Id),
                         ProductId = id
                     });
                 }

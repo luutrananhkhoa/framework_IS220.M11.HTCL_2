@@ -20,6 +20,7 @@ using OTDStore.Application.System.Roles;
 using OTDStore.Utilities.Constants;
 using OTDStore.Application.Catalog.Categories;
 using OTDStore.Application.Utilities.Slides;
+using OTDStore.Application.Catalog.Brands;
 
 namespace OTDStore.BackendApi
 {
@@ -47,6 +48,7 @@ namespace OTDStore.BackendApi
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ISlideService, SlideService>();
+            services.AddTransient<IBrandService, BrandService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
