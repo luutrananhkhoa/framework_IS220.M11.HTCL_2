@@ -2,7 +2,6 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,13 +15,11 @@ using OTDStore.Application.System.Users;
 using OTDStore.ViewModels.System.Users;
 using OTDStore.Data.EF;
 using OTDStore.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OTDStore.Application.System.Roles;
 using OTDStore.Utilities.Constants;
 using OTDStore.Application.Catalog.Categories;
+using OTDStore.Application.Utilities.Slides;
 
 namespace OTDStore.BackendApi
 {
@@ -49,6 +46,7 @@ namespace OTDStore.BackendApi
 
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ISlideService, SlideService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

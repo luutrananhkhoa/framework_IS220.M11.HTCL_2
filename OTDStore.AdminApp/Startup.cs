@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OTDStore.AdminApp.Services;
+using OTDStore.ApiIntegration;
 using OTDStore.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;

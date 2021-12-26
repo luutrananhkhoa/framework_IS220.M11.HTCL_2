@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OTDStore.Application.Catalog.Products;
 using OTDStore.ViewModels.Catalog.ProductImages;
 using OTDStore.ViewModels.Catalog.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OTDStore.BackendApi.Controllers
@@ -159,6 +155,14 @@ namespace OTDStore.BackendApi.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+
+        [HttpGet("latest/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetLatestProducts(int take)
+        {
+            var products = await _productService.GetLatestProducts(take);
+            return Ok(products);
         }
     }
 }

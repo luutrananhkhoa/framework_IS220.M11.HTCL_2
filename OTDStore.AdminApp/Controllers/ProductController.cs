@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
-using OTDStore.AdminApp.Services;
+using OTDStore.ApiIntegration;
 using OTDStore.Utilities.Constants;
 using OTDStore.ViewModels.Catalog.Products;
 using OTDStore.ViewModels.Common;
