@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\theme\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OTDStore.ApiIntegration\OTDStore.ApiIntegration.csproj" />
     <ProjectReference Include="..\OTDStore.Application\OTDStore.Application.csproj" />
   </ItemGroup>
