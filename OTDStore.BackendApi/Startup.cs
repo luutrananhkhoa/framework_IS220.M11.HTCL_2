@@ -135,6 +135,7 @@ namespace OTDStore.BackendApi
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -145,7 +146,7 @@ namespace OTDStore.BackendApi
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger eShopSolution V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger OTDStore");
             });
 
             app.UseEndpoints(endpoints =>

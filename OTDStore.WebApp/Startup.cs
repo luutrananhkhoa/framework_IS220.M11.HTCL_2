@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,12 +27,15 @@ namespace OTDStore.WebApp
         {
             services.AddHttpClient();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(options =>
+                    {
+                        options.LoginPath = "/Account/Login";
+                        options.AccessDeniedPath = "/User/Forbidden/";
+                    });
+
             services.AddControllersWithViews();
+
             services.AddRazorPages();
 
             services.AddSession(options =>
@@ -48,6 +52,8 @@ namespace OTDStore.WebApp
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 
             services.AddTransient<IBrandApiClient, BrandApiClient>();
+
+            services.AddTransient<IUserApiClient, UserApiClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,11 +71,12 @@ namespace OTDStore.WebApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
-            app.UseRouting();
+            app.UseStaticFiles();            
 
             app.UseAuthentication();
+
+            app.UseRouting();
 
             app.UseAuthorization();
 
