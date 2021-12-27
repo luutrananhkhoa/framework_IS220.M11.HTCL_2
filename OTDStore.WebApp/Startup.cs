@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OTDStore.ApiIntegration;
+using OTDStore.ViewModels.System.Users;
 using OTDStore.WebApp.Data;
 using System;
 
@@ -34,7 +36,8 @@ namespace OTDStore.WebApp
                         options.AccessDeniedPath = "/User/Forbidden/";
                     });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                         .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
             services.AddRazorPages();
 
