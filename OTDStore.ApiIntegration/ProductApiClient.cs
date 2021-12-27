@@ -42,6 +42,16 @@ namespace OTDStore.ApiIntegration
             return data;
         }
 
+        public async Task<PagedResult<ProductVM>> GetAllPagings(GetPublicProductPagingRequest request)
+        {
+            var data = await GetAsync<PagedResult<ProductVM>>(
+                $"/api/products/paging?pageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}&keyword={request.Keyword}" +
+                $"&categoryId={request.CategoryId}&brandId={request.BrandId}");
+
+            return data;
+        }
+
         public async Task<bool> CreateProduct(ProductCreateRequest request)
         {
             var sessions = _httpContextAccessor
@@ -177,6 +187,12 @@ namespace OTDStore.ApiIntegration
         public async Task<ProductVM> GetById(int id)
         {
             var data = await GetAsync<ProductVM>($"/api/products/{id}");
+            return data;
+        }
+
+        public async Task<ProductDetailVM> GetByIdApp(int id)
+        {
+            var data = await GetAsync<ProductDetailVM>($"/api/products/detail/{id}");
 
             return data;
         }

@@ -7,5 +7,7 @@ namespace OTDStore.ApiIntegration
     public interface IBrandApiClient
     {
         Task<List<BrandVM>> GetAll();
+
+        Task<BrandVM> GetByIdb(int id);
     }
 }

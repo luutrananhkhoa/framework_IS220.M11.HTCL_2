@@ -16,7 +16,7 @@ namespace OTDStore.Utilities.Constants
 
         public class ProductSettings
         {
-            public const int NumberOfProducts = 8;
+            public const int NumberOfProducts = 10;
         }
     }
 }

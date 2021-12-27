@@ -1,7 +1,117 @@
-﻿@{
-    ViewData["Title"] = "Category";
+﻿@model ProductDetailViewModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
+@{
+    ViewData["Title"] = "Chi tiết";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Detail</h1>
+<div class="container">
+    <div class="row">
+        <div class="detail-col-1">
+            <img class="detail-image" src="@(Configuration["BaseAddress"] + Model.Product.ThumbnailImage)" alt="">
+            <div class="detail-list-img">
+                <span><i class="fas fa-chevron-left"></i></span>
+                <div class="detail-list">
+                    <img src="/theme/assets/iphone13_1.jpg" alt="">
+                    <img src="/theme/assets/iphone13_2.jpg" alt="">
+                    <img src="/theme/assets/iphone13_3.jpg" alt="">
+                </div>
+                <span><i class="fas fa-chevron-right"></i></span>
+            </div>
+        </div>
+        <div class="detail-col-2">
+            <p class="detail-name">@Model.Product.Name</p>
+            <p class="detail-brand">Thương hiệu: @Model.Brand.Name</p>
+            <p class="detail-brand">Cấu hình sản phẩm:</p>
+            <div class="detail-option">
+                <p class="option-ram">@Model.Product.RAM</p>
+                <p class="option-memory">@Model.Product.Memory</p>
+                <p class="option-color">@Model.Product.Color</p>
+            </div>
+            @if (Model.Product.Stock > 0)
+            {
+                <p class="detail-status">Trạng thái: Còn hàng</p>
+            }
+            else
+            {
+                <p class="detail-status">Trạng thái: Hết hàng</p>
+            }
+            <p class="detail-price">@Model.Product.OriginalPrice.ToString("0,0.") &#8363</p>
+            <p class="detail-pricePromotion">@Model.Product.Price.ToString("0,0.") &#8363</p>
+            <button class="detail-btn">Mua Ngay</button>
+        </div>
+    </div>
+</div>
+<hr class="break-line">
+<h2 class="productRecommend">Chi tiết sản phẩm</h2>
+<hr class="break-line-rec">
+<div class="row">
+    <div class="detail-product-info">
+        <p>
+            Tên sản phẩm:
+            <span>@Model.Product.Name</span>
+        </p>
+        <p>
+            Hãng sản xuất:
+            <span>@Model.Brand.Name</span>
+        </p>
+        <p>
+            Màu sắc:
+            <span>@Model.Product.Color</span>
+        </p>
+        <p>
+            Dung lượng:
+            <span>@Model.Product.Memory</span>
+        </p>
+        <p>
+            RAM:
+            <span>@Model.Product.RAM</span>
+        </p>
+        <p>
+            Camera:
+            <span>@Model.Product.Camera</span>
+        </p>
+        <p>
+            Bluetooth:
+            <span>@Model.Product.Bluetooth</span>
+        </p>
+        <p>
+            Năm sản xuất:
+            <span>@Model.Product.YearRelease</span>
+        </p>
+    </div>
+</div>
+<h2 class="productRecommend">Sản phẩm gợi ý</h2>
+<hr class="break-line-rec">
+<div class="productRecommend-list">
+    <div class="row">
+        <div class="product-item">
+            <img class="product-item-img" src="/theme/assets/iphone13.png" alt="">
+            <p class="product-item-name">iPhone 13 128GB Chính Hãng (VN/A)</p>
+            <p class="product-item-promotion">25.290.000đ</p>
+            <p class="product-item-price">23.290.000đ</p>
+            <p class="product-item-status">Sẵn sàng</p>
+        </div>
+        <div class="product-item">
+            <img class="product-item-img" src="/theme/assets/iphone131.png" alt="">
+            <p class="product-item-name">iPhone 13 128GB Chính Hãng (VN/A)</p>
+            <p class="product-item-promotion">25.290.000đ</p>
+            <p class="product-item-price">23.290.000đ</p>
+            <p class="product-item-status">Sẵn sàng</p>
+        </div>
+        <div class="product-item">
+            <img class="product-item-img" src="/theme/assets/iphone133.png" alt="">
+            <p class="product-item-name">iPhone 13 128GB Chính Hãng (VN/A)</p>
+            <p class="product-item-promotion">25.290.000đ</p>
+            <p class="product-item-price">23.290.000đ</p>
+            <p class="product-item-status">Sẵn sàng</p>
+        </div>
+        <div class="product-item">
+            <img class="product-item-img" src="/theme/assets/iphone132.png" alt="">
+            <p class="product-item-name">iPhone 13 128GB Chính Hãng (VN/A)</p>
+            <p class="product-item-promotion">25.290.000đ</p>
+            <p class="product-item-price">23.290.000đ</p>
+            <p class="product-item-status">Sẵn sàng</p>
+        </div>
+    </div>
+</div>
 

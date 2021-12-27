@@ -14,8 +14,7 @@ namespace OTDStore.BackendApi.Controllers
     {
         private readonly IBrandService _brandService;
 
-        public BrandsController(
-            IBrandService brandService)
+        public BrandsController(IBrandService brandService)
         {
             _brandService = brandService;
         }
@@ -25,6 +24,13 @@ namespace OTDStore.BackendApi.Controllers
         {
             var products = await _brandService.GetAll();
             return Ok(products);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdb(int id)
+        {
+            var brand = await _brandService.GetByIdb(id);
+            return Ok(brand);
         }
     }
 }

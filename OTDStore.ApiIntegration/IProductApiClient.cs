@@ -21,7 +21,11 @@ namespace OTDStore.ApiIntegration
 
         Task<ProductVM> GetById(int id);
 
+        Task<ProductDetailVM> GetByIdApp(int id);
+
         Task<List<ProductVM>> GetLatestProducts(int take);
+
+        Task<PagedResult<ProductVM>> GetAllPagings(GetPublicProductPagingRequest request);
 
         Task<bool> DeleteProduct(int id);
     }
