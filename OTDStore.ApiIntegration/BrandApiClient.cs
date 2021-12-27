@@ -20,5 +20,10 @@ namespace OTDStore.ApiIntegration
         {
             return await GetListAsync<BrandVM>("/api/brands");
         }
+
+        public async Task<BrandVM> GetByIdb(int id)
+        {
+            return await GetAsync<BrandVM>($"/api/brands/{id}");
+        }
     }
 }

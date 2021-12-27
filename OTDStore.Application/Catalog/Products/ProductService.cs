@@ -21,6 +21,7 @@ namespace OTDStore.Application.Catalog.Products
     {
         private readonly OTDDbContext _context;
         private readonly IStorageService _storageService;
+        private const string USER_CONTENT_FOLDER_NAME = "user-content";
         public ProductService(OTDDbContext context, IStorageService storageService)
         {
             _context = context;
@@ -144,7 +145,9 @@ namespace OTDStore.Application.Catalog.Products
                         from pib in ppib.DefaultIfEmpty()
                         join b in _context.Brands on pib.BrandId equals b.Id into pibb
                         from b in pibb.DefaultIfEmpty()
-                        select new { p, pic, pib };
+                        join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                        from pi in ppi.DefaultIfEmpty()
+                        select new { p, pic, pib, pi, b, c };
             //2. filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.p.Name.Contains(request.Keyword));
@@ -186,7 +189,8 @@ namespace OTDStore.Application.Catalog.Products
                     OriginalPrice = x.p.OriginalPrice,
                     Stock = x.p.Stock,
                     ViewCount = x.p.ViewCount,
-                    DateCreated = x.p.DateCreated
+                    DateCreated = x.p.DateCreated,
+                    ThumbnailImage = x.pi.ImagePath
                 }).ToListAsync();
 
             //4. Select and projection
@@ -208,6 +212,12 @@ namespace OTDStore.Application.Catalog.Products
                                     join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
                                     where pic.ProductId == productId
                                     select c.Name).ToListAsync();
+            var brands = await (from b in _context.Brands
+                                join pib in _context.ProductInBrands on b.Id equals pib.BrandId
+                                where pib.ProductId == productId
+                                select b.Name).ToListAsync();
+
+            var image = await _context.ProductImages.Where(x => x.ProductId == productId && x.IsDefault == true).FirstOrDefaultAsync();
 
             var productViewModel = new ProductVM()
             {
@@ -230,10 +240,13 @@ namespace OTDStore.Application.Catalog.Products
                 Price = product.Price,
                 OriginalPrice = product.OriginalPrice,
                 Stock = product.Stock,
-                Categories = categories
+                ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg",
+                Brands = brands,
+                Categories = categories,
             };
             return productViewModel;
         }
+
 
         public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
@@ -256,7 +269,7 @@ namespace OTDStore.Application.Catalog.Products
             var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-            return fileName;
+            return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
         }
 
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)

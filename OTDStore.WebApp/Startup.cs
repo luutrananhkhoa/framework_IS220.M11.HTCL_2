@@ -46,6 +46,8 @@ namespace OTDStore.WebApp
             services.AddTransient<IProductApiClient, ProductApiClient>();
 
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
+
+            services.AddTransient<IBrandApiClient, BrandApiClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

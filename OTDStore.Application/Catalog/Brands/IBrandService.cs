@@ -9,5 +9,7 @@ namespace OTDStore.Application.Catalog.Brands
     public interface IBrandService
     {
         Task<List<BrandVM>> GetAll();
+
+        Task<BrandVM> GetByIdb(int id);
     }
 }

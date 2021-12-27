@@ -1,6 +1,5 @@
 ﻿@using OTDStore.ViewModels.Common;
 @model PagedResult<OTDStore.ViewModels.Catalog.Products.ProductVM>
-
 @{
     ViewData["Title"] = "Danh sách sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -88,36 +87,36 @@
                     <tbody>
                         @foreach (var item in Model.Items)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Color)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.OriginalPrice)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Price)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Stock)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.YearRelease)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
-                                @Html.ActionLink("Xem", "Details", new { id = item.Id }) |
-                                @Html.ActionLink("Xóa", "Delete", new { id = item.Id }) |
-                                @Html.ActionLink("Danh mục", "CategoryAssign", new { id = item.Id }) |
-                                @Html.ActionLink("Thương hiệu", "BrandAssign", new { id = item.Id })
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Color)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OriginalPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Stock)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.YearRelease)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Xem", "Details", new { id = item.Id }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }) |
+                                    @Html.ActionLink("Danh mục", "CategoryAssign", new { id = item.Id }) |
+                                    @Html.ActionLink("Thương hiệu", "BrandAssign", new { id = item.Id })
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
