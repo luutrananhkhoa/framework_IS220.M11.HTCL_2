@@ -1862,3 +1862,11 @@
     background-color: #fff;
     border-color: #dee2e6;
 }
+
+.text-danger {
+    color: #e74a3b !important;
+}
+
+a.text-danger:hover, a.text-danger:focus {
+    color: #be2617 !important;
+}
