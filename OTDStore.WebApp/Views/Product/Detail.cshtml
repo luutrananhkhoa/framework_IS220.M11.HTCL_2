@@ -37,7 +37,7 @@
             }
             <p class="detail-price">@Model.Product.OriginalPrice.ToString("0,0.") &#8363</p>
             <p class="detail-pricePromotion">@Model.Product.Price.ToString("0,0.") &#8363</p>
-            <button class="detail-btn">Mua Ngay</button>
+            <button class="detail-btn btn-add-cart" data-id="@Model.Product.Id">Mua Ngay</button>
         </div>
     </div>
 </div>
