@@ -8,6 +8,7 @@ namespace OTDStore.Utilities.Constants
     public class SystemConstants
     {
         public const string MainConnectionString = "OTDStoreDb";
+        public const string CartSession = "CartSession";
         public class AppSettings
         {
             public const string Token = "Token";

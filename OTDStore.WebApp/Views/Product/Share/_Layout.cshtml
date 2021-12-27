@@ -32,7 +32,24 @@
                 </ul>
                 <div class="nav-login">
                     <a href="./cart.html"><i class="fas fa-shopping-cart"></i></a>
-                    <Button class="nav-login-btn"><a href="./login.html">Đăng nhập</a></Button>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div method="post" class="dropdown">
+                            <button class="nav-login-btn">@User.Identity.Name</button>
+                            <div class="dropdown-content">
+                                <form method="post" asp-controller="Account" asp-action="Profile">
+                                    <button type="submit">Thông tin</button>
+                                </form>
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    <button type="submit">Đăng xuất</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <Button class="nav-login-btn"><a href="/Account/Login">Đăng nhập</a></Button>
+                    }
                 </div>
             </nav>
         </div>
