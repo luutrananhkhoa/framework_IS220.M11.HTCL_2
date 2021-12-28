@@ -15,5 +15,6 @@ namespace OTDStore.WebApp.Models
         public string Memory { get; set; }
         public string RAM { get; set; }
         public decimal Price { get; set; }
+        public decimal Total { get; set; }
     }
 }
