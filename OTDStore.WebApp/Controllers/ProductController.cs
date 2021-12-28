@@ -78,7 +78,5 @@ namespace OTDStore.WebApp.Controllers
             }
             return View(data);
         }
-
-
     }
 }

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OTDStore.ApiIntegration;
 using OTDStore.Utilities.Constants;
 using OTDStore.ViewModels.Sales;
+using OTDStore.ViewModels.System.Users;
 using OTDStore.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,15 @@ namespace OTDStore.WebApp.Controllers
     public class CartController : Controller
     {
         private readonly IProductApiClient _productApiClient;
+        private readonly IOrderApiClient _orderApiClient;
+        private readonly IUserApiClient _userApiClient;
 
-        public CartController(IProductApiClient productApiClient)
+        public CartController(IProductApiClient productApiClient, IUserApiClient userApiClient,
+            IOrderApiClient orderApiClient)
         {
             _productApiClient = productApiClient;
+            _userApiClient = userApiClient;
+            _orderApiClient = orderApiClient;
         }
 
         public IActionResult Index()
@@ -26,35 +32,53 @@ namespace OTDStore.WebApp.Controllers
             return View();
         }
 
-        public IActionResult Checkout()
-        {
-            return View(GetCheckoutViewModel());
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        { 
+            return View(await GetCheckoutViewModel());
         }
+        
 
         [HttpPost]
-        public IActionResult Checkout(CheckoutViewModel request)
+        public async Task<IActionResult> Checkout(CheckoutViewModel request)
         {
-            var model = GetCheckoutViewModel();
+            decimal total = 0;
+            var model = await GetCheckoutViewModel();
             var orderDetails = new List<OrderDetailVM>();
             foreach (var item in model.CartItems)
             {
                 orderDetails.Add(new OrderDetailVM()
                 {
                     ProductId = item.ProductId,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    Price = item.Price
                 });
+                total += item.Price * item.Quantity;
             }
             var checkoutRequest = new CheckoutRequest()
             {
+                UserId = request.CheckoutModel.UserId,
                 Address = request.CheckoutModel.Address,
                 Name = request.CheckoutModel.Name,
                 Email = request.CheckoutModel.Email,
                 PhoneNumber = request.CheckoutModel.PhoneNumber,
+                Total = total,
+                PaymentMethod = request.CheckoutModel.PaymentMethod,
                 OrderDetails = orderDetails
             };
 
-            TempData["SuccessMsg"] = "Order puschased successful";
-            return View(model);
+            var result = await _orderApiClient.CreateOrder(checkoutRequest);
+            //if (result.IsSuccessed)
+            //{
+                TempData["SuccessMsg"] = "Đặt hàng thành công";
+                return View(model);
+            //}
+            //else
+            //{
+            //    TempData["SuccessMsg"] = "Đặt hàng không thành công. Vui lòng thử lại !";
+            //    return View(model);
+            //}
+            
         }
 
         [HttpGet]
@@ -124,16 +148,26 @@ namespace OTDStore.WebApp.Controllers
             return Ok(currentCart);
         }
 
-        private CheckoutViewModel GetCheckoutViewModel()
+        private async Task<CheckoutViewModel> GetCheckoutViewModel()
         {
+            var result = await _userApiClient.GetByName(User.Identity.Name);
             var session = HttpContext.Session.GetString(SystemConstants.CartSession);
             List<CartItemViewModel> currentCart = new List<CartItemViewModel>();
             if (session != null)
                 currentCart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(session);
-            var checkoutVM = new CheckoutViewModel()
+            var checkoutVM = new CheckoutViewModel();
+            var user = result.ResultObj;
+            checkoutVM = new CheckoutViewModel()
             {
                 CartItems = currentCart,
                 CheckoutModel = new CheckoutRequest()
+                {
+                    Address = user.Address,
+                    Email = user.Email,
+                    Name = user.LastName + " " + user.FirstName,
+                    PhoneNumber = user.PhoneNumber,
+                    UserId = user.Id
+                }
             };
             return checkoutVM;
         }

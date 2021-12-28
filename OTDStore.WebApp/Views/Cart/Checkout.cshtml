@@ -43,6 +43,7 @@ else
         <h1 class="payment-title">Thông tin đơn hàng</h1>
             <form class="payment-section" action="/Cart/Checkout" method="post">
                 <div class="payment__col-1">
+                    <input type="hidden" asp-for="CheckoutModel.UserId" class="payment-input payment-name">
                     <input type="text" asp-for="CheckoutModel.Name" placeholder="Họ và tên" class="payment-input payment-name">
                     <input type="text" asp-for="CheckoutModel.Email" placeholder="Email" class="payment-input payment-email">
                     <input type="text" asp-for="CheckoutModel.PhoneNumber" placeholder="Số điện thoại" class="payment-input payment-phone">
@@ -50,17 +51,17 @@ else
                     <h2 class="payment-method__title">Phương thức thanh toán</h2>
                     <div class="payment-checkbox">
                         <div class="payment-checkbox__method">
-                            <input type="radio" name="payment" id="">
+                            <input type="radio" asp-for="CheckoutModel.PaymentMethod" value="1" id="">
                             <img src="/theme/assets//payment2.svg" alt="" srcset="">
                             <p>Thanh toán trực tiếp</p>
                         </div>
                         <div class="payment-checkbox__method">
-                            <input type="radio" name="payment" id="">
+                            <input type="radio" asp-for="CheckoutModel.PaymentMethod" value="2" id="">
                             <img src="/theme/assets//payment1.svg" alt="" srcset="">
                             <p>Thanh toán qua momo</p>
                         </div>
                         <div class="payment-checkbox__method">
-                            <input type="radio" name="payment" id="">
+                            <input type="radio" asp-for="CheckoutModel.PaymentMethod" value="3" id="">
                             <img src="/theme/assets//payment1.svg" alt="" srcset="">
                             <p>Thanh toán qua STK</p>
                         </div>

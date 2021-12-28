@@ -49,6 +49,7 @@ namespace OTDStore.BackendApi
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IBrandService, BrandService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

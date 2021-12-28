@@ -19,6 +19,8 @@ namespace OTDStore.Data.Configurations
             builder.Property(x => x.LastName).IsRequired().HasMaxLength(200);
 
             builder.Property(x => x.Dob).IsRequired();
+
+            builder.Property(x => x.Address).IsRequired().HasMaxLength(200);
         }
     }
 }

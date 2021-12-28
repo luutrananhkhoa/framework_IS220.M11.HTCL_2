@@ -12,7 +12,7 @@ namespace OTDStore.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -69,6 +69,13 @@ namespace OTDStore.BackendApi.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var user = await _userService.GetById(id);
+            return Ok(user);
+        }
+
+        [HttpGet("findbyname/{username}")]
+        public async Task<IActionResult> GetByName(string username)
+        {
+            var user = await _userService.GetByName(username);
             return Ok(user);
         }
 
