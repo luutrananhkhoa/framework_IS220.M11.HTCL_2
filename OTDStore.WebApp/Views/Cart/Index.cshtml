@@ -1,71 +1,32 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts{
+    <script src="~/js/cart.js"></script>
+    <script>
+        var cartController = new CartController();
+        cartController.initialize();
+    </script>
+}
+
 <div class="container">
     <div class="row__cart">
-        <h1 class="cart__title">GIỎ HÀNG</h1>
+        <h1 class="cart__title">
+            GIỎ HÀNG [<small><span id="lbl_number_of_items"></span> sản phẩm</small>]
+        </h1>
         <div class="cart__table">
-            <div class="cart__listItem">
-                <div class="cart__list">
-                    <div class="cart__img">
-                        <img src="/theme/assets/iphone13_1.jpg" alt="">
-                    </div>
-                    <div class="cart__info">
-                        <div class="item__info">
-                            <p class="item__info-name">Iphone 13</p>
-                            <p class="item__info-option">Hồng/128GB/6GB</p>
-                        </div>
-                        <div class="item__quan">
-                            <input type="text" value="1">
-                        </div>
-                        <p class="item__delete">Xoá</p>
-                        <div class="item__price">420.000đ</div>
-                    </div>
-                </div>
-                <div class="cart__list">
-                    <div class="cart__img">
-                        <img src="/theme/assets/iphone13_1.jpg" alt="">
-                    </div>
-                    <div class="cart__info">
-                        <div class="item__info">
-                            <p class="item__info-name">Iphone 13</p>
-                            <p class="item__info-option">Hồng/128GB/6GB</p>
-                        </div>
-                        <div class="item__quan">
-                            <input type="text" value="1">
-                        </div>
-                        <p class="item__delete">Xoá</p>
-                        <div class="item__price">420.000đ</div>
-                    </div>
-                </div>
-                <div class="cart__list">
-                    <div class="cart__img">
-                        <img src="/theme/assets/iphone13_1.jpg" alt="">
-                    </div>
-                    <div class="cart__info">
-                        <div class="item__info">
-                            <p class="item__info-name">Iphone 13</p>
-                            <p class="item__info-option">Hồng/128GB/6GB</p>
-                        </div>
-                        <div class="item__quan">
-                            <input type="text" value="1">
-                        </div>
-                        <p class="item__delete">Xoá</p>
-                        <div class="item__price">420.000đ</div>
-                    </div>
-                </div>
+            <div class="cart__listItem"> 
             </div>
             <div class="cart__payment">
                 <p class="payment__title">THÔNG TIN ĐƠN HÀNG</p>
-                <p class="payment__desc">Tổng tiền : 42.000.000đ</p>
+                <p class="payment__desc">Tổng tiền: <span id="lbl_total"> &#8363</span></p>
                 <a href="./payment.html"><button class="cart__btn">THANH TOÁN</button></a>
             </div>
         </div>
         <div class="cart-btn">
-            <a href="./product.html"><button class="cart-btn__continue">TIẾP TỤC MUA HÀNG</button></a>
+            <a href="/Product/Index"><button class="cart-btn__continue">TIẾP TỤC MUA HÀNG</button></a>
             <button class="cart-btn__update">CẬP NHẬT GIỎ HÀNG</button>
         </div>
 
