@@ -2,7 +2,6 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @section scripts{
     <script src="~/js/cart.js"></script>
     <script>
@@ -17,12 +16,20 @@
             GIỎ HÀNG [<small><span id="lbl_number_of_items"></span> sản phẩm</small>]
         </h1>
         <div class="cart__table">
-            <div class="cart__listItem"> 
+            <div class="cart__listItem">
             </div>
             <div class="cart__payment">
                 <p class="payment__title">THÔNG TIN ĐƠN HÀNG</p>
                 <p class="payment__desc">Tổng tiền: <span id="lbl_total"> &#8363</span></p>
-                <a href="/Cart/Checkout"><button class="cart__btn">THANH TOÁN</button></a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="/Cart/Checkout/"><button class="cart__btn">THANH TOÁN</button></a>
+                }
+                else
+                {
+                    <a href="/Account/Login"><button class="cart__btn"> ĐĂNG NHẬP và THANH TOÁN</button></a>
+                }
+
             </div>
         </div>
         <div class="cart-btn">

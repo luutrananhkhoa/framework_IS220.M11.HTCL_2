@@ -22,6 +22,9 @@ namespace OTDStore.ViewModels.System.Users
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
+
         [Display(Name = "Tài khoản")]
         public string UserName { get; set; }
 

@@ -136,7 +136,7 @@ namespace OTDStore.Application.System.Users
         }
 
         public async Task<ApiResult<UserVM>> GetById(Guid id)
-        {
+        { 
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
             {
@@ -150,6 +150,31 @@ namespace OTDStore.Application.System.Users
                 FirstName = user.FirstName,
                 Dob = user.Dob,
                 Id = user.Id,
+                LastName = user.LastName,
+                UserName = user.UserName,
+                Point = user.Point,
+                TypeOfUser = user.TypeOfUser,
+                Roles = roles
+            };
+            return new ApiSuccessResult<UserVM>(userVM);
+        }
+
+        public async Task<ApiResult<UserVM>> GetByName(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return new ApiErrorResult<UserVM>("User không tồn tại");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            var userVM = new UserVM()
+            {
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                Dob = user.Dob,
+                Id = user.Id,
+                Address = user.Address,
                 LastName = user.LastName,
                 UserName = user.UserName,
                 Point = user.Point,

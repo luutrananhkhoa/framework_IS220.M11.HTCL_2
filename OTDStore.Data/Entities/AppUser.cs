@@ -11,6 +11,7 @@ namespace OTDStore.Data.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Dob { get; set; }
+        public string Address { set; get; }
         public int Point { get; set; }
         public LoyalStatus TypeOfUser { get; set; }
         public List<Cart> Carts { get; set; }

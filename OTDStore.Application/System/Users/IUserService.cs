@@ -19,6 +19,8 @@ namespace OTDStore.Application.System.Users
 
         Task<ApiResult<UserVM>> GetById(Guid id);
 
+        Task<ApiResult<UserVM>> GetByName(string username);
+
         Task<ApiResult<bool>> Delete(Guid id);
 
         Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);

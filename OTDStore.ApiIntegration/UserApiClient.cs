@@ -108,6 +108,20 @@ namespace OTDStore.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<UserVM>>(body);
         }
 
+        public async Task<ApiResult<UserVM>> GetByName(string username)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/users/findbyname/{username}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<UserVM>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<UserVM>>(body);
+        }
+
         public async Task<ApiResult<bool>> Delete(Guid id)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
