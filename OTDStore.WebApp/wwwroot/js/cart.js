@@ -1,6 +1,48 @@
 ﻿var CartController = function () {
     this.initialize = function () {
         loadData();
+
+        registerEvents();
+    }
+
+    function registerEvents() {
+        $('body').on('click', '.btn-plus', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+            const quantity = parseInt($('#txt_quantity_' + id).val()) + 1;
+            updateCart(id, quantity);
+        });
+
+        $('body').on('click', '.btn-minus', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+            const quantity = parseInt($('#txt_quantity_' + id).val()) - 1;
+            updateCart(id, quantity);
+        });
+
+        $('body').on('click', '.btn-remove', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+            updateCart(id, 0);
+        });
+    }
+
+    function updateCart(id, quantity) {
+        $.ajax({
+            type: "POST",
+            url: '/Cart/UpdateCart',
+            data: {
+                id: id,
+                quantity: quantity
+            },
+            success: function (res) {
+                $('#lbl_number_items_header').text(res.length);
+                loadData();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     }
 
     function loadData() {
@@ -23,13 +65,15 @@
                           + "<p class=\"item__info-option\">"+ item.color + "/"+item.memory+"/"+item.ram+"</p>"
                           + "</div>"
                           + "<div class=\"item__quan\">"
-                          + "<input type=\"text\" value=\"1\">"
+                          + "<input id=\"txt_quantity_" + item.productId + "\" value=\"" + item.quantity + "\"  type=\"text\">"
                           + "</div>"
-                          + "<p class=\"item__delete\">Xoá</p>"
-                        + "<div class=\"item__price\">" + numberWithCommas(item.price) + " </div>"
-                        + "<div class=\"item__price\">" + numberWithCommas(amount) + "</div>"
+                          + "<button class=\"btn btn-minus\" data-id=\"" + item.productId + "\" type =\"button\"> <i class=\"<i class=\"fa-solid fa-circle-minus\"></i>\"></i></button>"
+                          + "<button class=\"btn btn-plus\" type=\"button\" data-id=\"" + item.productId + "\"><i class=\"<i class=\"fa-solid fa-circle-plus\"></i>\"></i></button>"
+                          + "<button class=\"item__delete btn-remove\"data-id=\"" + item.productId + "\">Xoá</button>"
+                          + "<div class=\"item__price\">" + numberWithCommas(item.price) + " </div>"
+                          + "<div class=\"item__price\">" + numberWithCommas(amount) + "</div>"
                           + "</div>"
-                        + "</div>"
+                          + "</div>"
                     total += amount;
                 });
                 $('.cart__listItem').html(html);
