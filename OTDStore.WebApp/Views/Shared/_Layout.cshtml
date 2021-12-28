@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,6 +20,7 @@
 </head>
 
 <body>
+    <input type="hidden" id="hidBaseAddress" value="@Configuration["BaseAddress"]" />
     <div class="app">
         <div class="container">
             <nav class="navbar">
@@ -31,7 +33,7 @@
                     <li><a asp-controller="Home" asp-action="About">Về chúng tôi</a></li>
                 </ul>
                 <div class="nav-login">
-                    <a href="./cart.html"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="/Cart"><i class="fas fa-shopping-cart"></i><sup id="lbl_number_items_header">0</sup></a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <div method="post" class="dropdown">
@@ -118,6 +120,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="~/js/function.js" type="text/javascript" charset="utf-8"></script>
     <script src="~/js/site.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var site = new SiteController();
+        site.initialize();
+    </script>
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

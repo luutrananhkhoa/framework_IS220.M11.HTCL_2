@@ -25,6 +25,16 @@ namespace OTDStore.WebApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult GetListItems()
+        {
+            var session = HttpContext.Session.GetString(SystemConstants.CartSession);
+            List<CartItemViewModel> currentCart = new List<CartItemViewModel>();
+            if (session != null)
+                currentCart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(session);
+            return Ok(currentCart);
+        }
+
         public async Task<IActionResult> AddToCart(int id)
         {
             var product = await _productApiClient.GetById(id);
@@ -46,6 +56,7 @@ namespace OTDStore.WebApp.Controllers
                 Image = product.ThumbnailImage,
                 Name = product.Name,
                 Quantity = quantity,
+                Price = product.Price,
                 Color = product.Color,
                 Memory = product.Memory,
                 RAM = product.RAM
@@ -54,7 +65,7 @@ namespace OTDStore.WebApp.Controllers
             currentCart.Add(cartItem);
 
             HttpContext.Session.SetString(SystemConstants.CartSession, JsonConvert.SerializeObject(currentCart));
-            return Ok();
+            return Ok(currentCart);
         }
     }
 }
