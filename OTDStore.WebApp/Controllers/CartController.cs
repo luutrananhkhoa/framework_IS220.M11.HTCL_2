@@ -51,7 +51,12 @@ namespace OTDStore.WebApp.Controllers
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
-                    Price = item.Price
+                    Price = item.Price,
+                    Name = item.Name,
+                    Color = item.Color,
+                    Memory = item.Memory,
+                    RAM = item.RAM
+
                 });
                 total += item.Price * item.Quantity;
             }
@@ -67,18 +72,9 @@ namespace OTDStore.WebApp.Controllers
                 OrderDetails = orderDetails
             };
 
-            var result = await _orderApiClient.CreateOrder(checkoutRequest);
-            //if (result.IsSuccessed)
-            //{
-                TempData["SuccessMsg"] = "Đặt hàng thành công";
-                return View(model);
-            //}
-            //else
-            //{
-            //    TempData["SuccessMsg"] = "Đặt hàng không thành công. Vui lòng thử lại !";
-            //    return View(model);
-            //}
-            
+            var result1 = await _orderApiClient.CreateOrder(checkoutRequest);
+            TempData["SuccessMsg"] = "Đặt hàng thành công";
+            return View(model);          
         }
 
         [HttpGet]

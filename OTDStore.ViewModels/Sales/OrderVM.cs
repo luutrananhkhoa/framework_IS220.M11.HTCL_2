@@ -18,7 +18,7 @@ namespace OTDStore.ViewModels.Sales
         public decimal Total { get; set; }
         public string PaymentMethod { get; set; }
         public OrderStatus Status { set; get; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetailVM> OrderDetails { get; set; }
         public AppUser AppUser { get; set; }
     }
 }

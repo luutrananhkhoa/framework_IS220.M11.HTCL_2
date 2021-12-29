@@ -40,6 +40,7 @@ namespace OTDStore.BackendApi
             services.AddDbContext<OTDDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
 
+
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<OTDDbContext>()
                 .AddDefaultTokenProviders();

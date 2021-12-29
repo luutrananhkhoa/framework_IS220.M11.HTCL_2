@@ -10,6 +10,9 @@ namespace OTDStore.ApiIntegration
     public interface IOrderApiClient
     {
         Task<ApiResult<bool>> CreateOrder(CheckoutRequest request);
-        //Task<ApiResult<PagedResult<OrderVM>>> GetOrdersPagings(GetOrderPagingRequest request);
+        Task<ApiResult<PagedResult<OrderVM>>> GetOrdersPagings(GetOrderPagingRequest request);
+        Task<ApiResult<OrderVM>> GetById(int id);
+        Task<ApiResult<OrderDetailVM>> GetOrderById(int id);
+        Task<ApiResult<bool>> UpdateOrder(int id, StatusUpdateRequest request);
     }
 }
