@@ -44,18 +44,65 @@ namespace OTDStore.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        //public async Task<ApiResult<PagedResult<OrderVM>>> GetOrdersPagings(GetOrderPagingRequest request)
-        //{
-        //    var client = _httpClientFactory.CreateClient();
-        //    var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+        public async Task<ApiResult<PagedResult<OrderVM>>> GetOrdersPagings(GetOrderPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
 
-        //    client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
-        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-        //    var response = await client.GetAsync($"/api/orders/paging?pageIndex=" +
-        //        $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
-        //    var body = await response.Content.ReadAsStringAsync();
-        //    var orders = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<OrderVM>>>(body);
-        //    return orders;
-        //}
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/orders/paging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var orders = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<OrderVM>>>(body);
+            return orders;
+        }
+
+        public async Task<ApiResult<OrderVM>> GetById(int id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/orders/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<OrderVM>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<OrderVM>>(body);
+        }
+
+        public async Task<ApiResult<OrderDetailVM>> GetOrderById(int id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/orders/{id}/details");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<OrderDetailVM>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<OrderDetailVM>>(body);
+        }
+
+        public async Task<ApiResult<bool>> UpdateOrder(int id, StatusUpdateRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/orders/{id}", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
     }
 }

@@ -247,7 +247,6 @@ namespace OTDStore.Application.Catalog.Products
             return productViewModel;
         }
 
-
         public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
             var product = await _context.Products.FindAsync(productId);
