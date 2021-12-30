@@ -65,6 +65,20 @@ namespace OTDStore.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpPut("edit/{username}")]
+        public async Task<IActionResult> UpdateByName(string name, [FromBody] UserUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.UpdateByName(request.UserName, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {

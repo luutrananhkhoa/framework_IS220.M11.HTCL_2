@@ -39,7 +39,7 @@
                         <div method="post" class="dropdown">
                             <button class="nav-login-btn">@User.Identity.Name</button>
                             <div class="dropdown-content">
-                                <form method="post" asp-controller="Account" asp-action="Profile">
+                                <form method="get" action="/Account/Edit">
                                     <button type="submit">Thông tin</button>
                                 </form>
                                 <form method="post" asp-controller="Account" asp-action="Logout">
@@ -125,6 +125,7 @@
         site.initialize();
     </script>
     @RenderSection("scripts", required: false)
+    @RenderSection("Scripts1", required: false)
 </body>
 
 </html>

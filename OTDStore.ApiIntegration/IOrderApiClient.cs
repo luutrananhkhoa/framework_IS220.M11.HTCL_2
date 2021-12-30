@@ -11,7 +11,9 @@ namespace OTDStore.ApiIntegration
     {
         Task<ApiResult<bool>> CreateOrder(CheckoutRequest request);
         Task<ApiResult<PagedResult<OrderVM>>> GetOrdersPagings(GetOrderPagingRequest request);
+        Task<ApiResult<PagedResult<OrderVM>>> GetUserOrdersPagings(Guid id, GetOrderPagingRequest request);
         Task<ApiResult<OrderVM>> GetById(int id);
+        Task<ApiResult<OrderVM>> GetByUserId(Guid id);
         Task<ApiResult<OrderDetailVM>> GetOrderById(int id);
         Task<ApiResult<bool>> UpdateOrder(int id, StatusUpdateRequest request);
     }

@@ -1,5 +1,6 @@
 ﻿using OTDStore.ViewModels.Common;
 using OTDStore.ViewModels.Sales;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,7 +14,11 @@ namespace OTDStore.Application.System.Users
 
         Task<ApiResult<PagedResult<OrderVM>>> GetOrderPaging(GetOrderPagingRequest request);
 
+        Task<ApiResult<PagedResult<OrderVM>>> GetUserOrderPaging(Guid id, GetOrderPagingRequest request);
+
         Task<ApiResult<OrderVM>> GetById(int id);
+
+        Task<List<OrderVM>> GetByUserId(Guid id);
 
         Task<ApiResult<bool>> Update(int id, StatusUpdateRequest request);
     }
