@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using OTDStore.ApiIntegration;
 using OTDStore.Utilities.Constants;
 using OTDStore.ViewModels.Sales;
+using OTDStore.ViewModels.System.Mail;
 using OTDStore.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -156,7 +157,6 @@ namespace OTDStore.WebApp.Controllers
                 TempData["result"] = "Cập nhật thông tin thành công";
                 return RedirectToAction("Edit");
             }
-
             ModelState.AddModelError("", result.Message);
             return View(request);
         }
@@ -181,14 +181,62 @@ namespace OTDStore.WebApp.Controllers
             return View(data.ResultObj);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Order()
-        //{
-        //    var tmp = await _userApiClient.GetByName(User.Identity.Name);
-        //    var user = tmp.ResultObj;
-        //    var result = await _orderApiClient.GetByUserId(user.Id);
-        //    return View(result.ResultObj);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(PasswordUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+            var user = await _userApiClient.GetByName(User.Identity.Name);
+            Guid id = user.ResultObj.Id;
+            var result = await _userApiClient.UpdatePassword(id, request);
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Cập nhật mật khẩu thành công";
+                return RedirectToAction("Edit");
+            }
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(MailRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+            var result = await _userApiClient.ResetPassword(request);
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Đã gửi mật khẩu vào email";
+                return RedirectToAction("ResetPassword");
+            }
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var result = await _orderApiClient.GetById(id);
+            return View(result.ResultObj);
+        }
 
         private ClaimsPrincipal ValidateToken(string jwtToken)
         {

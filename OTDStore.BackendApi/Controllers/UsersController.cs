@@ -65,6 +65,20 @@ namespace OTDStore.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpPut("password/{id}")]
+        public async Task<IActionResult> UpdatePassword(Guid id, [FromBody] PasswordUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.UpdatePassword(id, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
         [HttpPut("edit/{username}")]
         public async Task<IActionResult> UpdateByName(string name, [FromBody] UserUpdateRequest request)
         {

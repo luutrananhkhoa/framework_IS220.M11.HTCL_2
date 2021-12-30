@@ -1,4 +1,5 @@
 ﻿using OTDStore.ViewModels.Common;
+using OTDStore.ViewModels.System.Mail;
 using OTDStore.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace OTDStore.ApiIntegration
         Task<ApiResult<PagedResult<UserVM>>> GetUsersPagings(GetUserPagingRequest request);
 
         Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest);
+
+        Task<ApiResult<bool>> UpdatePassword(Guid id, PasswordUpdateRequest request);
+
+        Task<ApiResult<bool>> ResetPassword(MailRequest request);
 
         Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
 

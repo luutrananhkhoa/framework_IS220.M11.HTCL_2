@@ -21,6 +21,9 @@ using OTDStore.Utilities.Constants;
 using OTDStore.Application.Catalog.Categories;
 using OTDStore.Application.Utilities.Slides;
 using OTDStore.Application.Catalog.Brands;
+using OTDStore.Application.System.Mail;
+using OTDStore.Application.System;
+using OTDStore.ViewModels.System.Mail;
 
 namespace OTDStore.BackendApi
 {
@@ -40,6 +43,7 @@ namespace OTDStore.BackendApi
             services.AddDbContext<OTDDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
 
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<OTDDbContext>()
@@ -51,6 +55,7 @@ namespace OTDStore.BackendApi
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IMailService, MailService>();
 
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
