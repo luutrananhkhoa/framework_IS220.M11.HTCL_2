@@ -17,6 +17,8 @@ namespace OTDStore.ApiIntegration
 
         Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
 
+        Task<ApiResult<bool>> UpdateByName(string username, UserUpdateRequest request);
+
         Task<ApiResult<UserVM>> GetById(Guid id);
 
         Task<ApiResult<UserVM>> GetByName(string username);

@@ -47,10 +47,24 @@ namespace OTDStore.BackendApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("{id}/paging")]
+        public async Task<IActionResult> GetAllPaging(Guid id, [FromQuery] GetOrderPagingRequest request)
+        {
+            var products = await _orderService.GetUserOrderPaging(id, request);
+            return Ok(products);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var order = await _orderService.GetById(id);
+            return Ok(order);
+        }
+
+        [HttpGet("{id}/list")]
+        public async Task<IActionResult> GetByUserId(Guid id)
+        {
+            var order = await _orderService.GetByUserId(id);
             return Ok(order);
         }
 

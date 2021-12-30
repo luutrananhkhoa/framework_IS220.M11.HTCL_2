@@ -1,20 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using OTDStore.Data.EF;
 using OTDStore.Data.Entities;
 using OTDStore.Data.Enum;
-using OTDStore.ViewModels.Catalog.Products;
 using OTDStore.ViewModels.Common;
 using OTDStore.ViewModels.Sales;
-using OTDStore.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OTDStore.Application.System.Users
@@ -32,9 +25,7 @@ namespace OTDStore.Application.System.Users
         public async Task<ApiResult<PagedResult<OrderVM>>> GetOrderPaging(GetOrderPagingRequest request)
         {
             var query = from o in _context.Orders
-                        join od in _context.OrderDetails on o.Id equals od.OrderId into ood
-                        from od in ood.DefaultIfEmpty()
-                        select new { o, od };
+                        select new {o};
 
             int totalRow = await query.CountAsync();
 
@@ -49,7 +40,8 @@ namespace OTDStore.Application.System.Users
                     ShipPhoneNumber = x.o.ShipPhoneNumber,
                     Total = x.o.Total,
                     PaymentMethod = x.o.PaymentMethod,
-                    Status = x.o.Status
+                    Status = x.o.Status,
+                    OrderDate = x.o.OrderDate
                 }).ToListAsync();
 
             //4. Select and projection
@@ -75,7 +67,7 @@ namespace OTDStore.Application.System.Users
                 ShipPhoneNumber = request.PhoneNumber,
                 Total = request.Total,
                 PaymentMethod = request.PaymentMethod,
-                Status = (OrderStatus)1,               
+                Status = (OrderStatus)0,               
             };
 
             _context.Orders.Add(order);        
@@ -112,8 +104,6 @@ namespace OTDStore.Application.System.Users
                         where od.OrderId == id
                         select new { od };
 
-            int totalRow = await query.CountAsync();
-
             var data = await query.Select(x => new OrderDetailVM()
             {
                 ProductId = x.od.ProductId,
@@ -142,10 +132,99 @@ namespace OTDStore.Application.System.Users
             return new ApiSuccessResult<OrderVM>(orderViewModel);
         }
 
+        public async Task<List<OrderVM>> GetByUserId(Guid id)
+        {
+            var order = from o in _context.Orders
+                        where o.UserId == id
+                        select o;
+
+            var data = await order.OrderByDescending(x => x.OrderDate)
+                .Select(x => new OrderVM()
+                {
+                    Id = x.Id,
+                    UserId = x.UserId,
+                    OrderDate = x.OrderDate,
+                    ShipName = x.ShipName,
+                    ShipAddress = x.ShipAddress,
+                    ShipEmail = x.ShipEmail,
+                    ShipPhoneNumber = x.ShipPhoneNumber,
+                    Total = x.Total,
+                    PaymentMethod = x.PaymentMethod,
+                    Status = x.Status,                 
+                }).ToListAsync();        
+            return data;
+        }
+
+        public async Task<ApiResult<PagedResult<OrderVM>>> GetUserOrderPaging(Guid id, GetOrderPagingRequest request)
+        {
+            var query = from o in _context.Orders
+                        where o.UserId == id 
+                        orderby o.OrderDate descending
+                        select new { o };
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new OrderVM()
+                {
+                    Id = x.o.Id,
+                    ShipName = x.o.ShipName,
+                    ShipAddress = x.o.ShipAddress,
+                    ShipEmail = x.o.ShipEmail,
+                    ShipPhoneNumber = x.o.ShipPhoneNumber,
+                    Total = x.o.Total,
+                    PaymentMethod = x.o.PaymentMethod,
+                    Status = x.o.Status,
+                    OrderDate = x.o.OrderDate
+                }).ToListAsync();
+
+            //4. Select and projection
+            var pagedResult = new PagedResult<OrderVM>()
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return new ApiSuccessResult<PagedResult<OrderVM>>(pagedResult);
+        }
+
         public async Task<ApiResult<bool>> Update(int id, StatusUpdateRequest request)
         {
             var order = await _context.Orders.FindAsync(id);
+            int i = (int)order.Status;
+            int j = (int)request.Status;
             order.Status = request.Status;
+            
+            if (j != 0 && i == 0)
+            {
+                var query = from od in _context.OrderDetails
+                            where od.OrderId == id
+                            select new { od };
+
+                var data = await query.Select(x => new OrderDetailVM()
+                {
+                    ProductId = x.od.ProductId,
+                    Quantity = x.od.Quantity,
+                }).ToListAsync();
+
+                foreach (var item in data)
+                {
+                    var product = (from p in _context.Products
+                                   where p.Id == item.ProductId
+                                   select p).FirstOrDefault();
+                    if (item.Quantity > product.Stock)
+                    {
+                        return new ApiErrorResult<bool>($"Số lượng sản phẩm có id = {item.ProductId} không đủ.");
+                    }
+                    else
+                    {
+                        product.Stock = product.Stock - item.Quantity;
+                        _context.Products.Update(product);
+                    }
+                }
+            }           
             _context.Orders.Update(order);
             var result = await _context.SaveChangesAsync();
             if (result != 0)

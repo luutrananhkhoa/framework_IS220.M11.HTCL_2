@@ -17,6 +17,8 @@ namespace OTDStore.Application.System.Users
 
         Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
 
+        Task<ApiResult<bool>> UpdateByName(string username, UserUpdateRequest request);
+
         Task<ApiResult<UserVM>> GetById(Guid id);
 
         Task<ApiResult<UserVM>> GetByName(string username);
