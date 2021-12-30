@@ -135,6 +135,23 @@ namespace OTDStore.Application.System.Users
             return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
 
+        public async Task<ApiResult<bool>> UpdatePassword(Guid id, PasswordUpdateRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (request.NewPassword  != request.ConfirmPassword)
+            {
+                return new ApiErrorResult<bool>("Mật khẩu xác nhận không trùng khớp");
+            }
+            var tmp = await _userManager.RemovePasswordAsync(user);
+
+            var result = await _userManager.AddPasswordAsync(user, request.NewPassword);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
+
         public async Task<ApiResult<bool>> UpdateByName(string username, UserUpdateRequest request)
         {
             if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.UserName != username))

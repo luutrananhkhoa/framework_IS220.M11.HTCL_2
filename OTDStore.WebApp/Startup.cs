@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OTDStore.ApiIntegration;
+using OTDStore.ViewModels.System.Mail;
 using OTDStore.ViewModels.System.Users;
 using OTDStore.WebApp.Data;
 using System;
@@ -28,6 +29,8 @@ namespace OTDStore.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>

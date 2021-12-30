@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using OTDStore.Utilities.Constants;
 using OTDStore.ViewModels.Common;
+using OTDStore.ViewModels.System.Mail;
 using OTDStore.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,44 @@ namespace OTDStore.ApiIntegration
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync($"/api/users", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
+
+        public async Task<ApiResult<bool>> UpdatePassword(Guid id, PasswordUpdateRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/users/password/{id}", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
+
+        public async Task<ApiResult<bool>> ResetPassword(MailRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.Token);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/mails", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
