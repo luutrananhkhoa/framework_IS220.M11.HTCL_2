@@ -36,6 +36,11 @@ namespace OTDStore.WebApp.Controllers
             return View(viewModel);
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Feature()
         {
             var viewModel = new HomeViewModel()

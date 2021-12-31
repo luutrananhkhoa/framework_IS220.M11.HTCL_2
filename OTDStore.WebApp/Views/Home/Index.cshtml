@@ -5,14 +5,6 @@
 {
     <div class="slider">
         <div class="slide">
-            @*<input type="radio" name="" id="radio1">
-        <input type="radio" name="" id="radio2">
-        <div class="slide__img firts-lide">
-            <img src="/theme/assets/Poster1.png" class="img__promotion">
-        </div>
-        <div class="slide__img">
-            <img src="/theme/assets/Poster2.png" class="img__promotion">
-        </div>*@
            @for (int index = 0; index < Model.Slides.Count; index++)
             {
                 var slide = Model.Slides[index];
@@ -108,21 +100,4 @@
             <a href="#" class="mac_content-link">Khám phá ngay</a>
         </div>
     </div>
-    <!-- <div class="row row-brand">
-        <div class="brand">
-            <div class="brand-img">
-                <img src="./assets/apple.png" alt="">
-            </div>
-            <div class="brand-img">
-                <img src="./assets/asus.png" alt="">
-            </div>
-            <div class="brand-img">
-                <img src="./assets/samsung.png" alt="">
-            </div>
-            <div class="brand-img">
-                <img src="./assets/acer.png" alt="">
-            </div>
-        </div>
-    </div> -->
-
 </div>

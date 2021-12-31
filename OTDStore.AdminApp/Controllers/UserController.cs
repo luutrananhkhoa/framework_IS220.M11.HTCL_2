@@ -78,7 +78,8 @@ namespace OTDStore.AdminApp.Controllers
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     PhoneNumber = user.PhoneNumber,
-                    Id = id
+                    Id = id,
+                    Address = user.Address
                 };
                 return View(updateRequest);
             }
