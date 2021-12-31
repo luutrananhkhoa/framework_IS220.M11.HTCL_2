@@ -14,11 +14,7 @@
 }
 
 <div class="container-fluid">
-
-    <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Danh sách đơn hàng</h1>
-
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a class="btn btn-success" asp-action="Create" asp-controller="User">Tạo mới</a>
@@ -32,6 +28,7 @@
                     <div class="cold-md-3">
                         <button type="submit" class="btn btn-primary">Tìm</button>
                         <button type="button" onclick="window.location.href='/Order/Index'" class="btn btn-dark">Reset</button>
+                        <button type="button" onclick="window.location.href='/Order/RevenueStatistic'" class="btn btn-dark">Thống kê</button>
                     </div>
                 </div>
             </form>
@@ -106,7 +103,8 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Xem", "Detail", new { id = item.Id }) |
-                                    @Html.ActionLink("Trạng thái", "Edit", new { id = item.Id })
+                                    @Html.ActionLink("Trạng thái", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("In", "Print", new { id = item.Id })
                                 </td>
                             </tr>
                         }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OTDStore.Application.System.Users;
+using OTDStore.Data.EF;
 using OTDStore.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace OTDStore.BackendApi.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
+        private readonly OTDDbContext _context;
         private readonly IOrderService _orderService;
-        public OrdersController(IOrderService orderService)
+        public OrdersController(IOrderService orderService, OTDDbContext context)
         {
             _orderService = orderService;
+            _context = context;
         }
 
         [HttpPost]
@@ -81,5 +84,13 @@ namespace OTDStore.BackendApi.Controllers
             }
             return Ok(result);
         }
+
+        //[HttpGet("{statistic}")]
+        //public async Task<IActionResult> RevenueStatistic(TimeRequest request)
+        //{
+        //    var order = await _orderService.RevenueStatistic(request);
+        //    return Ok(order);
+        //}
+        
     }
 }

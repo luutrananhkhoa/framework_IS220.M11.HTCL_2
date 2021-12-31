@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using OTDStore.Data.EF;
 using OTDStore.Data.Entities;
 using OTDStore.Data.Enum;
@@ -7,6 +10,8 @@ using OTDStore.ViewModels.Common;
 using OTDStore.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +30,7 @@ namespace OTDStore.Application.System.Users
         public async Task<ApiResult<PagedResult<OrderVM>>> GetOrderPaging(GetOrderPagingRequest request)
         {
             var query = from o in _context.Orders
-                        select new {o};
+                        select new { o };
 
             int totalRow = await query.CountAsync();
 
@@ -67,10 +72,10 @@ namespace OTDStore.Application.System.Users
                 ShipPhoneNumber = request.PhoneNumber,
                 Total = request.Total,
                 PaymentMethod = request.PaymentMethod,
-                Status = (OrderStatus)0,               
+                Status = (OrderStatus)0,
             };
 
-            _context.Orders.Add(order);        
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             return order.Id;
         }
@@ -150,15 +155,15 @@ namespace OTDStore.Application.System.Users
                     ShipPhoneNumber = x.ShipPhoneNumber,
                     Total = x.Total,
                     PaymentMethod = x.PaymentMethod,
-                    Status = x.Status,                 
-                }).ToListAsync();        
+                    Status = x.Status,
+                }).ToListAsync();
             return data;
         }
 
         public async Task<ApiResult<PagedResult<OrderVM>>> GetUserOrderPaging(Guid id, GetOrderPagingRequest request)
         {
             var query = from o in _context.Orders
-                        where o.UserId == id 
+                        where o.UserId == id
                         orderby o.OrderDate descending
                         select new { o };
 
@@ -196,7 +201,7 @@ namespace OTDStore.Application.System.Users
             int i = (int)order.Status;
             int j = (int)request.Status;
             order.Status = request.Status;
-            
+
             if (j != 0 && i == 0)
             {
                 var query = from od in _context.OrderDetails
@@ -224,7 +229,7 @@ namespace OTDStore.Application.System.Users
                         _context.Products.Update(product);
                     }
                 }
-            }           
+            }
             _context.Orders.Update(order);
             var result = await _context.SaveChangesAsync();
             if (result != 0)
@@ -233,5 +238,6 @@ namespace OTDStore.Application.System.Users
             }
             return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
+
     }
 }
