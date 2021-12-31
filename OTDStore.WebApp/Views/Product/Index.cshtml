@@ -37,8 +37,9 @@
                 <a href='/Product/Detail/@item.Id' new { id=item.Id })>
                     <img class="product-item-img" src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="">
                     <p class="product-item-name">@item.Name</p>
-                    <p class="product-item-promotion">@item.Price.ToString("0,0.") &#8363</p>
-                    <p class="product-item-price">@item.OriginalPrice.ToString("0,0.") &#8363</p>
+                    <p class="product-item-name">@item.Color/@item.Memory/@item.RAM</p>
+                    <p class="product-item-promotion">@item.OriginalPrice.ToString("0,0.") &#8363</p>
+                    <p class="product-item-price">@item.Price.ToString("0,0.") &#8363</p>
                     @if (item.Stock > 0)
                     {
                         <p class="product-item-status">Sẵn sàng</p>

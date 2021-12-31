@@ -61,10 +61,7 @@
                                 Email
                             </th>
                             <th>
-                                Điểm tích lũy
-                            </th>
-                            <th>
-                                Khách hàng thân thiết
+                                Địa chỉ
                             </th>
                             <th></th>
                         </tr>
@@ -89,10 +86,7 @@
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Point)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TypeOfUser)
+                                    @Html.DisplayFor(modelItem => item.Address)
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |

@@ -43,13 +43,13 @@
     .container {
         margin-bottom: 20px;
     }
-    
-     :root {
-        --navy: #041727;
-        --yellow: #ffb703;
-        --blue: #5173B8;
-        --smooth: all 0.3s ease-in;
-    }
+
+:root {
+    --navy: #041727;
+    --yellow: #ffb703;
+    --blue: #496DFA;
+    --smooth: all 0.3s ease-in;
+}
     /* Navbar */
     
     .navbar {
@@ -702,7 +702,7 @@
     }
 
     .nav-filter__menu {
-        width: 120px;
+        width: 150px;
         height: 40px;
         padding: 0 10px;
         outline: none;
@@ -1016,16 +1016,18 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         display: flex;
     }
-    
-    .login-col-1 {
-        width: 500px;
-        height: 600px;
-        background-color: rgb(236, 236, 236);
-        border-radius: 15px 0px 0px 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+
+.login-col-1 {
+    width: 500px;
+    height: 600px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 15px 0px 0px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 20;
+}
     
     .login-col-1 img {
         width: 300px;
@@ -1035,7 +1037,6 @@
     
     .login-col-1 h1 {
         font-size: 30px;
-        color: var(--blue);
         margin: 30px;
     }
     
@@ -1062,7 +1063,6 @@
     
     .login-name {
         margin: 40px 0 15px;
-        color: var(--blue);
     }
     
     .login-rcm {
@@ -1079,7 +1079,6 @@
         /* display: inline-flex; */
         text-align: left;
         margin-left: 50px;
-        color: var(--blue);
         font-weight: 600;
     }
     
@@ -1110,7 +1109,7 @@
     }
     
     .login-btn {
-        width: 75%;
+        width: 300px;
         height: 44px;
         border-radius: 30px;
         background-color: var(--blue);
@@ -1163,6 +1162,50 @@
     .fa-arrow-left:hover {
         cursor: pointer;
     }
+
+.register-col {
+    width: 800px;
+    height: 500px;
+    position: relative;
+}
+
+    .register-col h1 {
+        font-size: 30px;
+        margin: 30px;
+    }
+
+    .register-col p {
+        font-size: 40px;
+        color: var(--navy);
+        margin-top: 75px;
+        text-align: center;
+    }
+
+.register-input {
+    width: 40%;
+    height: 40px;
+    margin-top: 20px;
+    border: 0px;
+    border-bottom: 3px solid var(--blue);
+    padding: 8px 10px;
+    font-size: 14px;
+    color: var(--blue);
+    outline: none;
+}
+
+.register-name {
+    margin-top: 15px 0 20px;
+    /* color: var(--blue); */
+}
+
+.fa-arrow-left {
+    font-size: 30px;
+    margin: 0;
+    position: absolute;
+    top: 35px;
+    left: 30px;
+    /* color: var(--blue); */
+}
     /* Mũi tên chuyển hình trong product detail */
     
     .fa-chevron-right,
@@ -1233,6 +1276,11 @@
         height: 500px;
     }
     /* Cart */
+
+    .btn-plus, .btn-minus, .btn-remove{
+        background-color: transparent;
+        border: 0px;
+    }
     
     .row__cart {
         height: 100%;
@@ -1324,10 +1372,11 @@
     .item__info {
         margin: 20px 40px;
     }
-    
+
     .item__info-name {
         font-size: 1.2rem;
         margin-bottom: 10px;
+        margin-top: 20px;
     }
     
     .item__info-option {
@@ -1336,7 +1385,7 @@
     /* item quantity */
     
     .item__quan {
-        margin: 20px 10px;
+        margin: 50px 10px;
     }
     
     .item__quan input {
@@ -1350,7 +1399,7 @@
     /* item price */
     
     .item__price {
-        margin: 30px 20px;
+        margin: 55px 20px;
     }
     
     .item__delete {
@@ -1622,7 +1671,7 @@
     
     .account__info {
         height: 100%;
-        width: 70%;
+        width: 100%;
         margin: 0 100px 0 120px;
         display: flex;
         flex-direction: column;
@@ -1633,15 +1682,17 @@
         font-size: 30px;
         margin-bottom: 40px;
     }
-    
-    .account__info label {
-        margin: 15px 0 10px;
-        font-size: 18px;
-        font-weight: bold;
-    }
+
+        .account__info label {
+            margin: 15px 0 10px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            display: block;
+        }
     
     .account__info input {
-        width: 90%;
+        width: 70%;
         height: 45px;
         font-size: 20px;
         padding: 15px;
@@ -1783,33 +1834,110 @@
         padding: 10px 0;
         border: 1px solid #000;
     }
+
+    .col-md-10, .col-sm-3, .col-sm-9 {
+        position: relative;
+        width: 100%;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
+    .col-md-10 {
+        flex: 0 0 83.33333%;
+        max-width: 83.33333%;
+    }
+
+    .col-sm-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .col-sm-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+
+.order-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
     
     .order__ID {
-        width: 10%;
+        width: 15%;
     }
-    
-    .order__info {
-        width: 40%;
-        text-align: left;
-    }
+
+.order__date {
+    width: 40%;
+    margin-left: 30px;
+    text-align: center;
+}
+
+.order__info {
+    width: 35%;
+    margin-left: 10px;
+    text-align: left;
+}
     
     .order__quan {
         width: 20%;
-        text-align: left;
+        text-align: center;
+        margin-left: 50px;
     }
     
     .order__quan li {
         text-align: center;
     }
-    
-    .order__total {
-        width: 20%;
-        text-align: right;
+
+.order__total {
+    width: 20%;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.order__status {
+    width: 30%;
+    margin-left: 30px;
+    text-align: center;
+}
+
+.order__table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+    .order__table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
     }
-    
-    .order__status {
-        width: 30%;
+
+    .order__table th,
+    .order__table td {
+        padding: 12px 15px;
+        text-align: center;
     }
+
+    .order__table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .order__table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .order__table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .order__table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
 
 .pagination {
     display: -ms-flexbox;
@@ -1826,14 +1954,14 @@
     padding: 0.5rem 0.75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
+    color: #000;
     background-color: #fff;
     border: 1px solid #dee2e6;
 }
 
     .page-link:hover {
         z-index: 2;
-        color: #0056b3;
+        color: #dd4600;
         text-decoration: none;
         background-color: #e9ecef;
         border-color: #dee2e6;
@@ -1859,8 +1987,8 @@
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #dd4600;
+    border-color: #dd4600;
 }
 
 .page-item.disabled .page-link {

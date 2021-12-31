@@ -31,6 +31,7 @@ namespace OTDStore.ViewModels.Sales
         public string ShipPhoneNumber { set; get; }
 
         [Display(Name = "Tổng tiền")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N0}")]
         public decimal Total { get; set; }
 
         [Display(Name = "Phương thức thanh toán")]
