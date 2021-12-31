@@ -64,15 +64,9 @@ else
                             <input type="radio" asp-for="CheckoutModel.PaymentMethod" value="3" id="">
                             <img src="/theme/assets//payment1.svg" alt="" srcset="">
                             <p>Thanh toán qua STK</p>
-                        </div>
-                        <div class="payment-checkbox__momo">
-                            <p>Thông tin chuyển khoản</p>
-                            <p>Chủ tài khoản: Nguyễn Minh Nhựt</p>
-                            <p>Số tài khoản: 0071000900804</p>
-                            <p>Vui lòng ghi mã đơn hàng ở nội dung chuyển tiền để đơn hàng được xác nhận nhanh chóng hơn. Cám ơn quý khách!</p>
-                        </div>
+                        </div>  
                         <div class="payment-complete">
-                            <a href="./cart.html">Giỏ hàng</a>
+                            <a href="/Cart/Index">Giỏ hàng</a>
                             <button type="submit" class="payment-button">Hoàn thành đơn hàng</button>
                         </div>
                     </div>
@@ -82,22 +76,31 @@ else
                     <hr class="payment-line">
                     <div class="payment-shipment">
                         <p>Giao hàng tận nơi</p>
-                        <p>40,000đ</p>
+                        <p>Miễn phí</p>
                     </div>
                     <hr class="payment-line">
                     <div class="payment-line_price">
                         <p>Tạm tính</p>
                         <p>@Model.CartItems.Sum(x => x.Quantity * x.Price).ToString("0,0.") &#8363</p>
                     </div>
-                    <div class="payment-line_price">
-                        <p>Phí vận chuyển</p>
-                        <p>40,000đ</p>
-                    </div>
                     <hr class="payment-line">
                     <div class="payment-line_price">
                         <p>Tổng cộng</p>
                         <p class="payment-total"><span class="payment-span">VND</span> @Model.CartItems.Sum(x => x.Quantity * x.Price).ToString("0,0.") &#8363</p>
                     </div>
+                    <div class="payment-checkbox__momo">
+                        <p>Thông tin chuyển khoản</p>
+                        <p>Chủ tài khoản: Nguyễn Minh Nhựt</p>
+                        <p>Số tài khoản: 0071000900804</p>
+                        <p>Vui lòng ghi thông tin ở nội dung chuyển tiền để đơn hàng được xác nhận nhanh chóng hơn. Cám ơn quý khách!</p>
+                    </div>
+                    <div class="payment-checkbox__momo">
+                        <p>Thông tin Momo</p>
+                        <p>Chủ tài khoản: Nguyễn Minh Nhựt</p>
+                        <p>Số tài khoản: 0393584324</p>
+                        <p>Vui lòng ghi thông tin ở nội dung chuyển tiền để đơn hàng được xác nhận nhanh chóng hơn. Cám ơn quý khách!</p>
+                    </div>
+                    
                 </div>
             </form>
         </div>

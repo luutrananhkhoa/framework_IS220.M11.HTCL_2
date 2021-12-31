@@ -22,13 +22,14 @@
         <div class="card-header py-3">
             <form asp-action="Index" method="get">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-7">
                         <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                     </div>
-                    <div class="cold-md-3">
+                    <div class="cold-md-5">
                         <button type="submit" class="btn btn-primary">Tìm</button>
                         <button type="button" onclick="window.location.href='/Order/Index'" class="btn btn-dark">Reset</button>
                         <button type="button" onclick="window.location.href='/Order/RevenueStatistic'" class="btn btn-dark">Thống kê</button>
+                        <button type="button" onclick="window.location.href='/Order/Print'" class="btn btn-dark">In hóa đơn</button>
                     </div>
                 </div>
             </form>
@@ -91,8 +92,7 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Xem", "Detail", new { id = item.Id }) |
-                                    @Html.ActionLink("Trạng thái", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("In", "Print", new { id = item.Id })
+                                    @Html.ActionLink("Trạng thái", "Edit", new { id = item.Id }) |                                  
                                 </td>
                             </tr>
                         }
