@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OTDStore.ApiIntegration;
+using OTDStore.Data.EF;
+using OTDStore.Utilities.Constants;
 using OTDStore.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -29,6 +32,9 @@ namespace OTDStore.AdminApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+
+            services.AddDbContext<OTDDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>

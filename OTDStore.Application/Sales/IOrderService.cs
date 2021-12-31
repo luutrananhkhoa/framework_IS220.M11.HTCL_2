@@ -1,4 +1,5 @@
-﻿using OTDStore.ViewModels.Common;
+﻿using Microsoft.AspNetCore.Mvc;
+using OTDStore.ViewModels.Common;
 using OTDStore.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace OTDStore.Application.System.Users
         Task<ApiResult<PagedResult<OrderVM>>> GetUserOrderPaging(Guid id, GetOrderPagingRequest request);
 
         Task<ApiResult<OrderVM>> GetById(int id);
+
+        //Task<IActionResult> RevenueStatistic(TimeRequest request);
 
         Task<List<OrderVM>> GetByUserId(Guid id);
 
