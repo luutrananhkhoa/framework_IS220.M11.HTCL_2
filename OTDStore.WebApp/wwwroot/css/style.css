@@ -1511,6 +1511,8 @@
     .payment-checkbox__momo {
         width: 90%;
         padding: 20px;
+        margin-left: 30px;
+        margin-top: 20px;
         font-weight: 400;
         text-align: center;
         border: 1px solid #ccc;
@@ -1523,6 +1525,7 @@
     .payment__col-2 {
         background-color: rgb(243, 243, 243);
         width: 50%;
+        height: 650px
     }
     
     .payment-input {
@@ -1612,11 +1615,11 @@
     .payment-btn:hover {
         cursor: pointer;
     }
-    
+
     .account {
         margin: 0 auto;
         margin-top: 40px;
-        padding: 0 250px;
+        padding: 0px 200px;
         display: flex;
     }
     

@@ -105,6 +105,11 @@ namespace OTDStore.Application.System.Users
         {
             var order = await _context.Orders.FindAsync(id);
 
+            if (order == null)
+            {
+                return new ApiErrorResult<OrderVM>("Không tồn tại hóa đơn");
+            }
+
             var query = from od in _context.OrderDetails
                         where od.OrderId == id
                         select new { od };
