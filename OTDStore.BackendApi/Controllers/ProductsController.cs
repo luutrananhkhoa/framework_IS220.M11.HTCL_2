@@ -18,14 +18,6 @@ namespace OTDStore.BackendApi.Controllers
             _productService = productService;
         }
 
-        ////http://localhost:port/product
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var products = await _publicProductService.GetAll();
-        //    return Ok(products);
-        //}
-
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetManageProductPagingRequest request)
         {

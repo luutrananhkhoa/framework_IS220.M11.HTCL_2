@@ -39,7 +39,11 @@ namespace OTDStore.AdminApp.Controllers
         public async Task<IActionResult> Index(LoginRequest request)
         {
             if (!ModelState.IsValid)
-                return View(ModelState);
+            {
+                ModelState.AddModelError("", "Vui lòng nhập đầy đủ thông tin");
+                return View();
+            }
+                
 
             var result = await _userApiClient.Authenticate(request);
             if (result.ResultObj == null)

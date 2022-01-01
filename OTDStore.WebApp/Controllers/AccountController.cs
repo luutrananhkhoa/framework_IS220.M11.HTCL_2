@@ -50,7 +50,7 @@ namespace OTDStore.WebApp.Controllers
             var result = await _userApiClient.Authenticate(request);
             if (result.ResultObj == null)
             {
-                ModelState.AddModelError("", "Login failure");
+                ModelState.AddModelError("", "Sai mật khẩu");
                 return View();
             }
             var userPrincipal = this.ValidateToken(result.ResultObj);

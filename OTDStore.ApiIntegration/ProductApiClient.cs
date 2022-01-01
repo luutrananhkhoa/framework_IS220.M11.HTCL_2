@@ -94,6 +94,7 @@ namespace OTDStore.ApiIntegration
             requestContent.Add(new StringContent(request.Battery.ToString()), "battery");
             requestContent.Add(new StringContent(request.Size.ToString()), "size");
             requestContent.Add(new StringContent(request.OS.ToString()), "os");
+            requestContent.Add(new StringContent(request.DateCreated.ToString()), "datecreate");
 
             var response = await client.PostAsync($"/api/products/", requestContent);
             return response.IsSuccessStatusCode;

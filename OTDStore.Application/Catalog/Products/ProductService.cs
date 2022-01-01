@@ -240,6 +240,7 @@ namespace OTDStore.Application.Catalog.Products
                 Price = product.Price,
                 OriginalPrice = product.OriginalPrice,
                 Stock = product.Stock,
+                DateCreated = product.DateCreated,
                 ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg",
                 Brands = brands,
                 Categories = categories,

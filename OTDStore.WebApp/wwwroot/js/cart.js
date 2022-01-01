@@ -69,7 +69,7 @@
                           + "<input id=\"txt_quantity_" + item.productId + "\" value=\"" + item.quantity + "\"  type=\"text\">"
                           + "</div>"           
                           + "<button class=\"btn btn-plus\" data-id=\"" + item.productId + "\" type=\"button\"><i class=\"fa-solid fa-circle-plus\"></i></button>"
-                        + "<button class=\"btn btn-remove\"data-id=\"" + item.productId + "\" type=\"button\"><i class=\"far fa-times-circle\"></i></button>"
+                          + "<button class=\"btn btn-remove\"data-id=\"" + item.productId + "\" type=\"button\"><i class=\"far fa-times-circle\"></i></button>"
                           + "<div class=\"item__price\">" + numberWithCommas(item.price) + " </div>"
                           + "<div class=\"item__price\">" + numberWithCommas(amount) + "</div>"
                           + "</div>"
