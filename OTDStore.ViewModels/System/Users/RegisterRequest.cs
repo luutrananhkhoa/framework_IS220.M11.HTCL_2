@@ -17,6 +17,9 @@ namespace OTDStore.ViewModels.System.Users
         [DataType(DataType.Date)]
         public DateTime Dob { get; set; }
 
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
+
         [Display(Name = "Email")]
         public string Email { get; set; }
 

@@ -54,11 +54,11 @@ namespace OTDStore.ViewModels.Catalog.Products
         [Display(Name = "Hệ điều hành")]
         public string OS { set; get; }
 
-        [Display(Name = "Giá bán")]
+        [Display(Name = "Giá khuyến mãi")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N0}")]
         public decimal Price { set; get; }
 
-        [Display(Name = "Giá nhập")]
+        [Display(Name = "Giá gốc")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N0}")]
         public decimal OriginalPrice { set; get; }
 

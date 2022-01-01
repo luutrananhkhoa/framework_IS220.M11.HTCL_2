@@ -21,29 +21,29 @@ namespace OTDStore.Data.Configurations
 
             builder.Property(x => x.Description).IsRequired();
 
-            builder.Property(x => x.YearRelease).IsRequired();
+            builder.Property(x => x.YearRelease).IsRequired().HasMaxLength(10);
 
             builder.Property(x => x.Insurance).IsRequired();
 
-            builder.Property(x => x.Color).IsRequired();
+            builder.Property(x => x.Color).IsRequired().HasMaxLength(20);
 
-            builder.Property(x => x.CPU).IsRequired();
+            builder.Property(x => x.CPU).IsRequired().HasMaxLength(20);
 
-            builder.Property(x => x.Memory).IsRequired();
+            builder.Property(x => x.Memory).IsRequired().HasMaxLength(20);
 
-            builder.Property(x => x.RAM).IsRequired();       
+            builder.Property(x => x.RAM).IsRequired().HasMaxLength(20);       
 
-            builder.Property(x => x.Camera).IsRequired();
+            builder.Property(x => x.Camera).IsRequired().HasMaxLength(200);
 
-            builder.Property(x => x.Bluetooth).IsRequired();
+            builder.Property(x => x.Bluetooth).IsRequired().HasMaxLength(100);
 
-            builder.Property(x => x.Monitor).IsRequired();
+            builder.Property(x => x.Monitor).IsRequired().HasMaxLength(100);
 
-            builder.Property(x => x.Battery).IsRequired();
+            builder.Property(x => x.Battery).IsRequired().HasMaxLength(50);
 
-            builder.Property(x => x.Size).IsRequired();
+            builder.Property(x => x.Size).IsRequired().HasMaxLength(30);
 
-            builder.Property(x => x.OS).IsRequired();
+            builder.Property(x => x.OS).IsRequired().HasMaxLength(30);
 
             builder.Property(x => x.Price).IsRequired();
 

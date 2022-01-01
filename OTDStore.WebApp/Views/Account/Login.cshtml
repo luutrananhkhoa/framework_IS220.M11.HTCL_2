@@ -17,6 +17,7 @@
                 <div class="login-col-2">
                     <h1 class="login-name">ĐĂNG NHẬP</h1>
                     <form action="/Account/Login" method="post" class="login-div">
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <p class="login-label">USERNAME</p>
                         <input type="text" placeholder="Username" class="login-input" name="UserName">
                         <p class="login-label">PASSWORD</p>

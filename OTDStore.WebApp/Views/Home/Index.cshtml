@@ -1,44 +1,34 @@
 ﻿@model HomeViewModel
 @{ ViewData["Title"] = "Home Page"; }
 
-@section slider
-{
-    <div class="slider">
+<div class="slider">
+    <div class="slides">
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <div class="slide firts">
+            <a><img src="/theme/assets/Poster1.png" alt="" class="img__promotion"></a>
+        </div>
         <div class="slide">
-           @for (int index = 0; index < Model.Slides.Count; index++)
-            {
-                var slide = Model.Slides[index];
-                <input type="radio" name="" id="radio1">
-                <input type="radio" name="" id="radio2">
-               @if (index == 0)
-                {
-                    <div class="slide__img firts-lide">
-                        <a><img src="@slide.Image" alt="@slide.Name" class="img__promotion"></a>
-                    </div>
-                }
-                else
-                {
-                    <div class="slide__img">
-                        <a><img src="@slide.Image" alt="@slide.Name" class="img__promotion"></a>
-                    </div>
-                }
-             }
-            <div class="slide-auto">
-                <div class="auto-1"></div>
-                <div class="auto-2"></div>
-            </div>
-            </div>
+            <a><img src="/theme/assets/Poster2.png" alt="" class="img__promotion"></a>
+        </div>
+        <div class="slide-auto">
+            <div class="auto-btn-1"></div>
+            <div class="auto-btn-2"></div>
         </div>
     </div>
-}
+    <div class="slide-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-1">
             <h2 class="col-1-brand">Apple</h2>
             <h1 class="col-1-name">IPHONE 13 SIÊU PHẨM KHÔNG THỂ BỎ LỠ</h1>
             <p class="col-1-content">iPhone mới kế thừa thiết kế đặc trưng từ iPhone 12 Pro Max khi sở hữu khung viền vuông vức, mặt lưng kính cùng màn hình tai thỏ tràn viền nằm ở phía trước.</p>
-            <a href="./product-detail.html"><button class="col-1-btn">Khám Phá Ngay</button></a>
-            <a href="./product.html"><button class="col-1-btn__sub">Xem Thêm</button></a>
+            <a href="/Product/?categoryId=1&brandId=2&keyword=iphone+13"><button class="col-1-btn">Khám Phá Ngay</button></a>
+            <a href="/Product?categoryId=1&brandId=2&keyword="><button class="col-1-btn__sub">Xem Thêm</button></a>
         </div>
         <div class="col-2">
             <img src="https://cdn.tgdd.vn/Products/Images/42/223602/iphone-13-blue-1-600x600.jpg" class="col-2-img">
@@ -74,8 +64,8 @@
         <div class="intro-mac_content">
             <hr>
             <h1 class="mac_content-title">Macbook Pro 2021</h1>
-            <p class="mac_content-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam fuga magni laudantium repellendus? Labore perferendis ut, praesentium explicabo unde totam!</p>
-            <a href="#" class="mac_content-link">Khám phá ngay</a>
+            <p class="mac_content-desc">Macbook Pro 16-inch 2021 M1 Pro 512GB vừa được Apple trình làng trong sự kiện Unleashed vào 0h ngày 19/10 theo giờ Việt Nam. Đây là siêu phẩm được cải tiến vượt bậc về mọi mặt từ chip Apple M1 Pro đến màn hình hỗ trợ công nghệ mini-LED, Pro Motion 120 Hz.!</p>
+            <a href="/Product?categoryId=2&brandId=2&keyword=macbook+pro+2021" class="mac_content-link">Khám phá ngay</a>
         </div>
     </div>
     <div class="row intro-product">
@@ -84,9 +74,9 @@
         </div>
         <div class="intro-mac_content">
             <hr>
-            <h1 class="mac_content-title">Samsung Galaxy Z Fold3 5G</h1>
-            <p class="mac_content-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam fuga magni laudantium repellendus? Labore perferendis ut, praesentium explicabo unde totam!</p>
-            <a href="#" class="mac_content-link">Khám phá ngay</a>
+            <h1 class="mac_content-title">Samsung Galaxy Z Fold 3 5G</h1>
+            <p class="mac_content-desc">Với sự thành công đáng kinh ngạc và luôn cháy hàng từ lúc ra mắt đến thời điểm hiện tại của hai thế hệ trước là Fold 1 và Z Fold 2. Galaxy Z Fold 3 lần này được ra mắt với độ hoàn thiện cao về thiết kế và hiệu năng. Mang đến cho người dùng một trải nghiệm cực kỳ thú vị hơn.!</p>
+            <a href="/Product?categoryId=1&brandId=1&keyword=Samsung+Galaxy+Z+Fold+3" class="mac_content-link">Khám phá ngay</a>
         </div>
     </div>
     <div class="row intro-product">
@@ -96,8 +86,8 @@
         <div class="intro-mac_content">
             <hr>
             <h1 class="mac_content-title">Ipad Pro 2021</h1>
-            <p class="mac_content-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam fuga magni laudantium repellendus? Labore perferendis ut, praesentium explicabo unde totam!</p>
-            <a href="#" class="mac_content-link">Khám phá ngay</a>
+            <p class="mac_content-desc">iPad Pro 2021 là dòng sản phẩm máy tính bảng cao cấp vừa được Apple ra mắt tại sự kiện Apple Spring Loaded vừa qua. Với thiết kế thời thượng cùng hiệu năng cực khủng iPad Pro 2021 M1 chắc chắn sẽ là một lựa chọn tuyệt vời trong công việc, học tập cũng như giải trí.!</p>
+            <a href="/Product?categoryId=5&brandId=2&keyword=Ipad+Pro+2021" class="mac_content-link">Khám phá ngay</a>
         </div>
     </div>
 </div>

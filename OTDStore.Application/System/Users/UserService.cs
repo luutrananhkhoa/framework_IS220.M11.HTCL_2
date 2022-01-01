@@ -37,7 +37,7 @@ namespace OTDStore.Application.System.Users
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return new ApiErrorResult<string>("Đăng nhập không đúng");
+                return new ApiErrorResult<string>("Sai mật khẩu");
             }
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
@@ -80,7 +80,8 @@ namespace OTDStore.Application.System.Users
                     UserName = x.UserName,
                     FirstName = x.FirstName,
                     Id = x.Id,
-                    LastName = x.LastName
+                    LastName = x.LastName,
+                    Address = x.Address
                 }).ToListAsync();
 
             //4. Select and projection
@@ -103,7 +104,8 @@ namespace OTDStore.Application.System.Users
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
@@ -126,7 +128,7 @@ namespace OTDStore.Application.System.Users
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.PhoneNumber = request.PhoneNumber;
-
+            user.Address = request.Address;
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
