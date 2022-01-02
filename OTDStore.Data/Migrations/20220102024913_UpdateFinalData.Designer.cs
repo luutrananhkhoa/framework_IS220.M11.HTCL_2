@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OTDStore.Data.EF;
 
 namespace OTDStore.Data.Migrations
 {
     [DbContext(typeof(OTDDbContext))]
-    partial class OTDDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220102024913_UpdateFinalData")]
+    partial class UpdateFinalData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
