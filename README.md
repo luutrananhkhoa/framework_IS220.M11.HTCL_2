@@ -1,8 +1,28 @@
-# framework_IS220.M11.HTCL_2
+# GIỚI THIỆU MÔN HỌC
+* *Tên môn học:* Xây dựng HTTT trên các framework
+* *Mã lớp:* IS220.M11.HTCL
+* *Giảng viên*: Thầy Vũ Minh Sang và Thầy Nguyễn Minh Nhựt
+
+# OTDStore
 <br>Đây là project được phát triển bởi UIT_OTD Team, mục đích phát triển website  bán các sản phẩm công nghệ như Laptop, Điện thoại, Tablet...</br>
 <br>Dự án này được truyền cảm hứng từ OTDGang và các website đang hoạt động chuyên cung cấp các sản phẩm công nghệ như CellphoneS hay HoangHaMoblie.</br>
 <br> Người dùng có thể xem và lựa chọn những sản phẩm chất lượng, chính hãng phù hợp với bản thân. </br>
 <br>Đồng thời, cho phép các quản trị viên theo dõi việc mua bán, các đơn hàng diễn ra trên web, cũng như quản lý các sản phẩm.<br>
+
+# <h2>Tóm tắt chức năng</h2>
+-Khách hàng:
++ Đăng nhập, đăng ký.
++ Xem sản phẩm, mua và đặt hàng.
++ Xem thông tin cơ bản của account.
++ Xem thông tin đơn hàng của tài khoản.
+
+-Admin:
+Thêm, sửa, xóa, tìm kiếm các Mục sau:
++ Đơn hàng. 
++ Tài khoản(account).
++ Danh sách khách hàng, admin.
++ Kiểm soát thông tin sản phẩm.
++ Cho in hóa đơn.
 
 # Cấu hình cần thiết:
 <br> Trước khi tiến hành cài đặt đồ án này, hãy đảm bảo máy bạn đã cài đặt sẵn các ứng dụng sau: <br>
@@ -11,8 +31,9 @@
 <br> Khuyến nghị cài đặt phiên bản 2017 hoặc các bản mới hơn </br>
 <h3> Microsoft SQL Sever </h3>
 <br> Khuyến nghị cài bản đặt bản từ 14 trở lên </br> 
-
-# Cài đặt: 
+<h3> ASP.NET </h3>
+<br> Khuyến nghị cài đặt phiên bản từ 5.0 trở lên </br>
+# <h2> Cài đặt: </h2> 
 <br> Để tiến hành cài đặt trên máy của người dùng, đầu tiên, người dùng tiến hành tải database về tại đường dẫn bên dưới:</br>
 <br> **https://drive.google.com/drive/folders/1QmcPsLa4IKVFtwelo83XeGADOxa-Z7n7** </br>
 <br> Sau khi người dùng tải về và giải nén được file, cần tiến hành di chuyển các file nhận được khi giải nén tới đường dẫn sau:</br>
