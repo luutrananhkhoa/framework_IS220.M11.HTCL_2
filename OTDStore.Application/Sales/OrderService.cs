@@ -207,7 +207,7 @@ namespace OTDStore.Application.System.Users
             int j = (int)request.Status;
             order.Status = request.Status;
 
-            if (j != 0 && i == 0)
+            if ((j != 0 || j != 4) && i == 0)
             {
                 var query = from od in _context.OrderDetails
                             where od.OrderId == id
