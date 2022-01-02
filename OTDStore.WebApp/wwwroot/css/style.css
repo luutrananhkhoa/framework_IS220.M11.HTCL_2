@@ -672,10 +672,11 @@
         cursor: pointer;
         transition: all 0.18s ease-in;
     }
-    
+
     .product-item-img {
         text-align: center;
         width: 250px;
+        height: 250px;
     }
     
     .product-item-img:hover {
