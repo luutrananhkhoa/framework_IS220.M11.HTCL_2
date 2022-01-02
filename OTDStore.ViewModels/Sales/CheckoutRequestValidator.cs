@@ -11,7 +11,9 @@ namespace OTDStore.ViewModels.Sales
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Nhập tên người nhận hàng");
 
-            RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Nhập số điện thoại nhận hàng");
+            RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Nhập số điện thoại")
+                .MaximumLength(11).WithMessage("Số điện thoại không hợp lệ")
+                .MinimumLength(10).WithMessage("Số điện thoại không hợp lệ");
 
             RuleFor(x => x.Address).NotEmpty().WithMessage("Nhập địa chỉ nhận hàng");
 

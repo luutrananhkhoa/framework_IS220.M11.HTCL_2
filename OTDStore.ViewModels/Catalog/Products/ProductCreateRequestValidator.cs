@@ -12,26 +12,25 @@ namespace OTDStore.ViewModels.Catalog.Products
             RuleFor(x => x.Name).NotEmpty().WithMessage("Nhập tên sản phẩm")
                 .MaximumLength(200).WithMessage("Tên không vượt quá 200 kí tự");
 
-            RuleFor(x => x.Description).NotEmpty().WithMessage("Nhập mô tả sản phẩm")
-                .MaximumLength(200);
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Nhập mô tả sản phẩm");
 
             RuleFor(x => x.YearRelease).NotEmpty().WithMessage("Nhập năm ra mắt")
-                .MaximumLength(10).WithMessage("Năm không vượt quá 10 kí tự");
+                .MaximumLength(4).WithMessage("Năm không vượt quá 4 kí tự");
 
             RuleFor(x => x.Insurance).NotEmpty().WithMessage("Nhập thời gian bảo hành")
                 .MaximumLength(200);
 
             RuleFor(x => x.Color).NotEmpty().WithMessage("Nhập màu sắc")
-                .MaximumLength(20).WithMessage("Không vượt quá 20 kí tự");
+                .MaximumLength(200).WithMessage("Không vượt quá 200 kí tự");
 
             RuleFor(x => x.CPU).NotEmpty().WithMessage("Nhập CPU")
-                .MaximumLength(20).WithMessage("Không vượt quá 20 kí tự");
+                .MaximumLength(200).WithMessage("Không vượt quá 200 kí tự");
 
             RuleFor(x => x.Memory).NotEmpty().WithMessage("Nhập dung lượng bộ nhớ")
-                .MaximumLength(20).WithMessage("Không vượt quá 20 kí tự");
+                .MaximumLength(200).WithMessage("Không vượt quá 200 kí tự");
 
             RuleFor(x => x.RAM).NotEmpty().WithMessage("Nhập dung lượng RAM")
-                .MaximumLength(20).WithMessage("Không vượt quá 20 kí tự");
+                .MaximumLength(200).WithMessage("Không vượt quá 200 kí tự");
 
             RuleFor(x => x.Camera).NotEmpty().WithMessage("Nhập thông số camera")
                 .MaximumLength(200);
@@ -46,10 +45,10 @@ namespace OTDStore.ViewModels.Catalog.Products
                 .MaximumLength(50);
 
             RuleFor(x => x.Size).NotEmpty().WithMessage("Nhập kích thước")
-                .MaximumLength(30).WithMessage("Không vượt quá 30 kí tự");
+                .MaximumLength(50).WithMessage("Không vượt quá 50 kí tự");
 
             RuleFor(x => x.OS).NotEmpty().WithMessage("Nhập OS")
-                .MaximumLength(30).WithMessage("Không vượt quá 30 kí tự");
+                .MaximumLength(50).WithMessage("Không vượt quá 50 kí tự");
 
             RuleFor(x => x.Price).NotEmpty().WithMessage("Nhập giá bán");
 

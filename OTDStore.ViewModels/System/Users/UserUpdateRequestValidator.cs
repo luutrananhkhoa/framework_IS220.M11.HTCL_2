@@ -23,7 +23,9 @@ namespace OTDStore.ViewModels.System.Users
                 .Matches(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")
                 .WithMessage("Không đúng định dạng");
 
-            RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Nhập số điện thoại");
+            RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Nhập số điện thoại")
+                .MaximumLength(11).WithMessage("Số điện thoại không hợp lệ")
+                .MinimumLength(10).WithMessage("Số điện thoại không hợp lệ");
         }
     }
 }
